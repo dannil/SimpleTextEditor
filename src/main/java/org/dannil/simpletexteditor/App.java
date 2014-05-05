@@ -40,7 +40,7 @@ import javax.swing.event.UndoableEditListener;
 import javax.swing.text.Document;
 import javax.swing.undo.UndoManager;
 
-public class App extends JFrame implements OnClickListener {
+public class App extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	public static final String applicationName = "Simple Text Editor";
