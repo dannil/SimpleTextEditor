@@ -172,10 +172,10 @@ public class App extends JFrame {
         });
         
         //Icon action toolbar
-		ImageIcon iconNew = new ImageIcon(getClass().getResource("/images/new.png"));
-		ImageIcon iconOpen = new ImageIcon(getClass().getResource("/images/open.png"));
-		ImageIcon iconSave = new ImageIcon(getClass().getResource("/images/save.png"));
-		ImageIcon iconExit = new ImageIcon(getClass().getResource("/images/exit.png"));
+		ImageIcon iconNew = new ImageIcon(getClass().getResource("../resources/images/new.png"));
+		ImageIcon iconOpen = new ImageIcon(getClass().getResource("../resources/images/open.png"));
+		ImageIcon iconSave = new ImageIcon(getClass().getResource("../resources/images/save.png"));
+		ImageIcon iconExit = new ImageIcon(getClass().getResource("../resources/images/exit.png"));
         
 		JButton btnNew = new JButton(iconNew);
         btnNew.addActionListener(new ActionListener() {
