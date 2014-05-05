@@ -40,7 +40,7 @@ import javax.swing.event.UndoableEditListener;
 import javax.swing.text.Document;
 import javax.swing.undo.UndoManager;
 
-public class App extends JFrame {
+public class App extends JFrame implements OnClickListener {
 	
 	private static final long serialVersionUID = 1L;
 	public static final String applicationName = "Simple Text Editor";
@@ -172,7 +172,7 @@ public class App extends JFrame {
         });
         
         //Icon action toolbar
-		ImageIcon iconNew = new ImageIcon(getClass().getResource("../resources/images/new.png"));
+		ImageIcon iconNew = new ImageIcon(getClass().getResource("/src/main/resources/org/dannil/simpletexteditor/images/new.png"));
 		ImageIcon iconOpen = new ImageIcon(getClass().getResource("../resources/images/open.png"));
 		ImageIcon iconSave = new ImageIcon(getClass().getResource("../resources/images/save.png"));
 		ImageIcon iconExit = new ImageIcon(getClass().getResource("../resources/images/exit.png"));
