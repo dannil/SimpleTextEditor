@@ -172,10 +172,10 @@ public class App extends JFrame {
         });
         
         //Icon action toolbar
-		ImageIcon iconNew = new ImageIcon(getClass().getResource("/src/main/resources/org/dannil/simpletexteditor/images/new.png"));
-		ImageIcon iconOpen = new ImageIcon(getClass().getResource("../resources/images/open.png"));
-		ImageIcon iconSave = new ImageIcon(getClass().getResource("../resources/images/save.png"));
-		ImageIcon iconExit = new ImageIcon(getClass().getResource("../resources/images/exit.png"));
+        ImageIcon iconNew = new ImageIcon(getClass().getResource("images/new.png"));
+		ImageIcon iconOpen = new ImageIcon(getClass().getResource("images/open.png"));
+		ImageIcon iconSave = new ImageIcon(getClass().getResource("images/save.png"));
+		ImageIcon iconExit = new ImageIcon(getClass().getResource("images/exit.png"));
         
 		JButton btnNew = new JButton(iconNew);
         btnNew.addActionListener(new ActionListener() {
@@ -229,14 +229,14 @@ public class App extends JFrame {
 		    }
 		});
 
-		InputMap im = textArray[activeTab].getInputMap(JComponent.WHEN_FOCUSED);
-		ActionMap am = textArray[activeTab].getActionMap();
+		InputMap im = this.textArray[activeTab].getInputMap(JComponent.WHEN_FOCUSED);
+		ActionMap am = this.textArray[activeTab].getActionMap();
 
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
 
 		am.put("Undo", new AbstractAction() {
-		    @Override
+			@Override
 		    public void actionPerformed(ActionEvent e) {
 	            if (undoManager.canUndo()) {
 	                undoManager.undo();
@@ -264,7 +264,7 @@ public class App extends JFrame {
 		menuToolBar.add(btnSave, BorderLayout.WEST);
 		menuToolBar.setAlignmentX(0);
 
-		ImageIcon iconDocument = new ImageIcon(getClass().getResource("/images/doc.png"));
+		//ImageIcon iconDocument = new ImageIcon(getClass().getResource("/images/doc.png"));
 		
         tabbedPane.addTab("*new", createInnerTextArea("This is the first tab.", textArray[0]));
         
