@@ -51,15 +51,15 @@ public class App extends JFrame {
 					"euismod, vitae iaculis elit commodo. Vivamus malesuada tristique volutpat. Praesent elit elit, ornare a erat vel, lobortis condimentum est. Nulla pretium " +
 					"malesuada justo ut tristique. Sed iaculis lacus ultrices, lobortis nibh a, convallis dui. Fusce varius orci ultrices elit gravida auctor. ";
 	
-	MenuAction action;
-	JMenuBar menuBar;
-    JToolBar menuToolBar;
-	JTabbedPane tabbedPane;
-	JTextArea textArea;
-	JTextArea[] textArray;
-	UndoManager undoManager;
-	int activeTab;
-	int totalTabCount;
+	private MenuAction action;
+	private JMenuBar menuBar;
+	private JToolBar menuToolBar;
+	private JTabbedPane tabbedPane;
+	private JTextArea textArea;
+	private JTextArea[] textArray;
+	private UndoManager undoManager;
+	private int activeTab;
+	private int totalTabCount;
 	
 	public App() {
 		initUI();
@@ -144,7 +144,7 @@ public class App extends JFrame {
         });
         
         //Build Edit menu and its options
-		JMenu edit = new JMenu("Edit");
+		/*JMenu edit = new JMenu("Edit");
 		file.setMnemonic(KeyEvent.VK_E);
 		
         JMenuItem editUndo = new JMenuItem("Undo");
@@ -169,7 +169,7 @@ public class App extends JFrame {
 	                undoManager.redo();
 	            }
         	}
-        });
+        });*/
         
         //Icon action toolbar
         ImageIcon iconNew = new ImageIcon(getClass().getResource("images/new.png"));
@@ -282,12 +282,12 @@ public class App extends JFrame {
 		file.add(fileExit);
 		
 		//Edit menu option
-		edit.add(editUndo);
-		edit.add(editRedo);
+		//edit.add(editUndo);
+		//edit.add(editRedo);
 		
 		//Menubar
 		menuBar.add(file);
-		menuBar.add(edit);
+		//menuBar.add(edit);
 		
 		setJMenuBar(menuBar);
 		
