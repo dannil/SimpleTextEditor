@@ -13,7 +13,7 @@
     <property name="jar.dir" value="${build.dir}/jar" />
 
     <!-- Define the main class -->
-    <property name="main-class" value="org.wmt.wmtadmin.MainView" />
+    <property name="main-class" value="org.dannil.simpletexteditor.ApplicationView" />
 
     <!-- Define the class path -->
     <path id="classpath">
