@@ -1,6 +1,7 @@
 # Directories #
 build/
 bin/
+bin_temp/
 gen/
 target/
 
