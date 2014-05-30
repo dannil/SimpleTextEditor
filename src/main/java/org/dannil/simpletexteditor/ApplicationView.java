@@ -1,5 +1,7 @@
 package org.dannil.simpletexteditor;
 
+import java.io.InputStream;
+
 import javax.swing.ImageIcon;
 
 import org.dannil.simpletexteditor.controller.ApplicationController;
@@ -26,9 +28,7 @@ public final class ApplicationView {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try
-		{
-			System.out.println(System.getProperty("user.dir") + "src/main/resources/images/new.png");
+		try {
 			ApplicationView window = new ApplicationView();
 			window.open();
 		}
@@ -78,24 +78,32 @@ public final class ApplicationView {
 		
 		Menu mnFile = new Menu(mntmFile);
 		mntmFile.setMenu(mnFile);
-		
-		MenuItem mntmNew = new MenuItem(mnFile, SWT.NONE);
+
+		MenuItem mntmNew = new MenuItem(mnFile, SWT.PUSH);
 		mntmNew.setText("New");
-		Image imgNew = new Image(this.shell.getDisplay(), System.getProperty("user.dir") + "/src/main/resources/images/new.png");
+		Image imgNew = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
 		mntmNew.setImage(imgNew);
 		
-		MenuItem mntmOpen = new MenuItem(mnFile, SWT.NONE);
+		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
 		mntmOpen.setText("Open");
+		Image imgOpen = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
+		mntmOpen.setImage(imgOpen);
 		
-		MenuItem mntmSave = new MenuItem(mnFile, SWT.NONE);
+		MenuItem mntmSave = new MenuItem(mnFile, SWT.PUSH);
 		mntmSave.setText("Save");
+		Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
+		mntmSave.setImage(imgSave);
 		
-	    MenuItem mntmExitSeparator = new MenuItem(mnFile, SWT.SEPARATOR);
+	    new MenuItem(mnFile, SWT.SEPARATOR);
 		
-		MenuItem mntmExit = new MenuItem(mnFile, SWT.NONE);
+		MenuItem mntmExit = new MenuItem(mnFile, SWT.PUSH);
 		mntmExit.setText("Exit");
+		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
+		mntmExit.setImage(imgExit);
 		
 		this.txtMainEditField = new Text(this.shell, SWT.BORDER);
 
+		
+		//force new build
 	}
 }
