@@ -12,15 +12,15 @@ class LogTextPanel extends JPanel {
     public LogTextPanel() {
         super(new GridLayout(1, 1));
 
-        textArea = new JTextArea();
-        add(new JScrollPane(textArea));
+        this.textArea = new JTextArea();
+        add(new JScrollPane(this.textArea));
     }
 
     public void append(String text) {
-        textArea.append(text);
+        this.textArea.append(text);
     }
 
     public String getText() {
-        return textArea.getText();
+        return this.textArea.getText();
     }
 }

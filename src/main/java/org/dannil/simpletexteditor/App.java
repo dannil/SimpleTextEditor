@@ -69,20 +69,20 @@ public class App extends JFrame {
 		setLayout(new BorderLayout());
 		
 		//Declare OO objects that's used through the document
-		action = new MenuAction();
-		menuBar = new JMenuBar();
-		menuToolBar = new JToolBar();
-		tabbedPane = new JTabbedPane();
-		textArea = new JTextArea();
-		textArray = new JTextArea[100];
-		undoManager = new UndoManager();
+		this.action = new MenuAction();
+		this.menuBar = new JMenuBar();
+		this.menuToolBar = new JToolBar();
+		this.tabbedPane = new JTabbedPane();
+		this.textArea = new JTextArea();
+		this.textArray = new JTextArea[100];
+		this.undoManager = new UndoManager();
 		
-		for(int i = 0; i < textArray.length; i++)
+		for(int i = 0; i < this.textArray.length; i++)
 		{
-		    textArray[i] = new JTextArea();
+		    this.textArray[i] = new JTextArea();
 		}
 		
-		totalTabCount = 0;
+		this.totalTabCount = 0;
 		
 		boolean crossPlatform = true;
 		if(crossPlatform) {
@@ -205,32 +205,32 @@ public class App extends JFrame {
         });
 		
 		//Tab bar
-		tabbedPane.addChangeListener(new ChangeListener() {
+		this.tabbedPane.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				activeTab = tabbedPane.getSelectedIndex();
-				System.out.println(activeTab + " - " + textArray[activeTab].getText());
+				App.this.activeTab = App.this.tabbedPane.getSelectedIndex();
+				System.out.println(App.this.activeTab + " - " + App.this.textArray[App.this.activeTab].getText());
 			}
 		});
 		
 		//Text area
 		addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
-				textArray[activeTab].requestFocus();
+				App.this.textArray[App.this.activeTab].requestFocus();
 			}
 		});
 		
-		Document doc = textArray[activeTab].getDocument();
+		Document doc = this.textArray[this.activeTab].getDocument();
 		doc.addUndoableEditListener(new UndoableEditListener() {
 		    @Override
 		    public void undoableEditHappened(UndoableEditEvent e) {
 		        //System.out.println("Add edit");
-		        undoManager.addEdit(e.getEdit());
+		        App.this.undoManager.addEdit(e.getEdit());
 		    }
 		});
 
-		InputMap im = this.textArray[activeTab].getInputMap(JComponent.WHEN_FOCUSED);
-		ActionMap am = this.textArray[activeTab].getActionMap();
+		InputMap im = this.textArray[this.activeTab].getInputMap(JComponent.WHEN_FOCUSED);
+		ActionMap am = this.textArray[this.activeTab].getActionMap();
 
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
@@ -238,16 +238,16 @@ public class App extends JFrame {
 		am.put("Undo", new AbstractAction() {
 			@Override
 		    public void actionPerformed(ActionEvent e) {
-	            if (undoManager.canUndo()) {
-	                undoManager.undo();
+	            if (App.this.undoManager.canUndo()) {
+	                App.this.undoManager.undo();
 	            }
 		    }
 		});
 		am.put("Redo", new AbstractAction() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-	            if (undoManager.canRedo()) {
-	                undoManager.redo();
+	            if (App.this.undoManager.canRedo()) {
+	                App.this.undoManager.redo();
 	            }
 		    }
 		});
@@ -258,19 +258,19 @@ public class App extends JFrame {
 		JPanel toolBarPanel = new JPanel();
 		toolBarPanel.setLayout(new BoxLayout(toolBarPanel, BoxLayout.Y_AXIS));
 		
-		menuToolBar.setFloatable(false);
-		menuToolBar.add(btnNew, BorderLayout.WEST);
-		menuToolBar.add(btnOpen, BorderLayout.WEST);
-		menuToolBar.add(btnSave, BorderLayout.WEST);
-		menuToolBar.setAlignmentX(0);
+		this.menuToolBar.setFloatable(false);
+		this.menuToolBar.add(btnNew, BorderLayout.WEST);
+		this.menuToolBar.add(btnOpen, BorderLayout.WEST);
+		this.menuToolBar.add(btnSave, BorderLayout.WEST);
+		this.menuToolBar.setAlignmentX(0);
 
 		//ImageIcon iconDocument = new ImageIcon(getClass().getResource("/images/doc.png"));
 		
-        tabbedPane.addTab("*new", createInnerTextArea("This is the first tab.", textArray[0]));
+        this.tabbedPane.addTab("*new", createInnerTextArea("This is the first tab.", this.textArray[0]));
         
-		tabbedPane.setAlignmentX(0);
+		this.tabbedPane.setAlignmentX(0);
 		
-		toolBarPanel.add(menuToolBar);
+		toolBarPanel.add(this.menuToolBar);
 		
 		add(toolBarPanel, BorderLayout.NORTH);
 		
@@ -286,12 +286,12 @@ public class App extends JFrame {
 		//edit.add(editRedo);
 		
 		//Menubar
-		menuBar.add(file);
+		this.menuBar.add(file);
 		//menuBar.add(edit);
 		
-		setJMenuBar(menuBar);
+		setJMenuBar(this.menuBar);
 		
-		add(tabbedPane);
+		add(this.tabbedPane);
 		
 		//General JFrame options
         setTitle(applicationName + " - *new");
@@ -322,28 +322,28 @@ public class App extends JFrame {
     }
     
     public void actionNew() {
-		action.actionNewActionListener();
-		setTitle(action.getAppTitle());
-		tabbedPane.addTab("*new", createInnerTextArea("", textArray[tabbedPane.getTabCount()]));
-		tabbedPane.setTitleAt(tabbedPane.getTabCount() - 1, "*new");
-		tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
-		textArray[activeTab].setText("ID: " + tabbedPane.getSelectedIndex());
-		textArray[activeTab].requestFocus();
+		this.action.actionNewActionListener();
+		setTitle(this.action.getAppTitle());
+		this.tabbedPane.addTab("*new", createInnerTextArea("", this.textArray[this.tabbedPane.getTabCount()]));
+		this.tabbedPane.setTitleAt(this.tabbedPane.getTabCount() - 1, "*new");
+		this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount() - 1);
+		this.textArray[this.activeTab].setText("ID: " + this.tabbedPane.getSelectedIndex());
+		this.textArray[this.activeTab].requestFocus();
 		//textArray[activeTab].setText(action.getTextAreaContent());
     }
     
     public void actionOpen() {
-		action.actionOpenActionListener();
-		setTitle(action.getAppTitle());
-		tabbedPane.setTitleAt(tabbedPane.getSelectedIndex(), action.getFileName());
-		textArray[activeTab].setText(action.getTextAreaContent());
-		textArray[activeTab].requestFocus();
+		this.action.actionOpenActionListener();
+		setTitle(this.action.getAppTitle());
+		this.tabbedPane.setTitleAt(this.tabbedPane.getSelectedIndex(), this.action.getFileName());
+		this.textArray[this.activeTab].setText(this.action.getTextAreaContent());
+		this.textArray[this.activeTab].requestFocus();
     }
     
     public void actionSave() {
-		action.actionSaveActionListener(textArray[activeTab]);
-		setTitle(action.getAppTitle());
-		textArray[activeTab].requestFocus();
+		this.action.actionSaveActionListener(this.textArray[this.activeTab]);
+		setTitle(this.action.getAppTitle());
+		this.textArray[this.activeTab].requestFocus();
     }
 	
 	public static void main(String[] args) {

@@ -23,9 +23,9 @@ public class MenuAction {
 	}
 	
 	public void actionNewActionListener() {
-		appTitle = App.applicationName + " - *new";
-		textAreaContent = "";
-		existingFile = false;
+		this.appTitle = App.applicationName + " - *new";
+		this.textAreaContent = "";
+		this.existingFile = false;
 	}
 	
 	public void actionOpenActionListener() {
@@ -33,8 +33,8 @@ public class MenuAction {
         int returnVal = openFile.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
         	try {
-        		fileName = openFile.getSelectedFile().getName();
-        		filePath = openFile.getSelectedFile().getCanonicalPath();
+        		this.fileName = openFile.getSelectedFile().getName();
+        		this.filePath = openFile.getSelectedFile().getCanonicalPath();
         		BufferedReader br = new BufferedReader(new FileReader(openFile.getSelectedFile()));
         		StringBuilder sb = new StringBuilder();
         		String line = br.readLine();
@@ -46,43 +46,43 @@ public class MenuAction {
         		if(sb.length() != 0) {
         			sb.setLength(sb.length() - 1);
         		}
-        		textAreaContent = sb.toString();
+        		this.textAreaContent = sb.toString();
         		br.close();
-        		existingFile = true;
+        		this.existingFile = true;
         	} catch (IOException e) {
         		e.printStackTrace();
         	}
-    		appTitle = App.applicationName + " - " + filePath;
+    		this.appTitle = App.applicationName + " - " + this.filePath;
         } else if(returnVal == JFileChooser.CANCEL_OPTION) {
-        	if(existingFile) {
-        		appTitle = App.applicationName + " - " + filePath;
+        	if(this.existingFile) {
+        		this.appTitle = App.applicationName + " - " + this.filePath;
         	} else {
-            	appTitle = App.applicationName;
+            	this.appTitle = App.applicationName;
         	}
         }
 	}
 	
 	public void actionSaveActionListener(JTextArea area) {
-		textAreaContent = area.getText();
-		if(!existingFile) {
-			existingFile = !existingFile;
+		this.textAreaContent = area.getText();
+		if(!this.existingFile) {
+			this.existingFile = !this.existingFile;
     		JFileChooser saveFile = new JFileChooser();
             int returnVal = saveFile.showSaveDialog(null);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
 				try {
             		BufferedWriter bw = new BufferedWriter(new FileWriter(saveFile.getSelectedFile()));
-            		bw.write(textAreaContent);
+            		bw.write(this.textAreaContent);
             		bw.close();
-	        		filePath = saveFile.getSelectedFile().getCanonicalPath();
+	        		this.filePath = saveFile.getSelectedFile().getCanonicalPath();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-        		appTitle = appTitle + " - " + filePath;
+        		this.appTitle = this.appTitle + " - " + this.filePath;
             }
 		} else {
 			try {
-        		BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-        		bw.write(textAreaContent);
+        		BufferedWriter bw = new BufferedWriter(new FileWriter(this.filePath));
+        		bw.write(this.textAreaContent);
         		bw.close();
 			} catch(IOException e) {
 				e.printStackTrace();
@@ -91,27 +91,27 @@ public class MenuAction {
 	}
 	
 	public String getAppName() {
-		return appName;
+		return this.appName;
 	}
 	
 	public String getAppTitle() {
-		return appTitle;
+		return this.appTitle;
 	}
 	
 	public String getFileName() {
-		return fileName;
+		return this.fileName;
 	}
 	
 	public String getFilePath() {
-		return filePath;
+		return this.filePath;
 	}
 	
 	public String getTextAreaContent() {
-		return textAreaContent;
+		return this.textAreaContent;
 	}
 	
 	public boolean getExistingFile() {
-		return existingFile;
+		return this.existingFile;
 	}
 	
 }
