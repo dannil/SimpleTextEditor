@@ -11,6 +11,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Label;
 
 public final class ApplicationView {
 
@@ -26,6 +28,7 @@ public final class ApplicationView {
 	public static void main(String[] args) {
 		try
 		{
+			System.out.println(System.getProperty("user.dir") + "src/main/resources/images/new.png");
 			ApplicationView window = new ApplicationView();
 			window.open();
 		}
@@ -65,6 +68,7 @@ public final class ApplicationView {
 		this.shell = new Shell();
 		this.shell.setSize(700, 451);
 		this.shell.setText("Simple Text Editor");
+		this.shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		Menu menu = new Menu(this.shell, SWT.BAR);
 		this.shell.setMenuBar(menu);
@@ -77,7 +81,7 @@ public final class ApplicationView {
 		
 		MenuItem mntmNew = new MenuItem(mnFile, SWT.NONE);
 		mntmNew.setText("New");
-		Image imgNew = new Image(this.shell.getDisplay(), "../../../resources/images/new.png");
+		Image imgNew = new Image(this.shell.getDisplay(), System.getProperty("user.dir") + "/src/main/resources/images/new.png");
 		mntmNew.setImage(imgNew);
 		
 		MenuItem mntmOpen = new MenuItem(mnFile, SWT.NONE);
@@ -86,11 +90,12 @@ public final class ApplicationView {
 		MenuItem mntmSave = new MenuItem(mnFile, SWT.NONE);
 		mntmSave.setText("Save");
 		
+	    MenuItem mntmExitSeparator = new MenuItem(mnFile, SWT.SEPARATOR);
+		
 		MenuItem mntmExit = new MenuItem(mnFile, SWT.NONE);
 		mntmExit.setText("Exit");
 		
 		this.txtMainEditField = new Text(this.shell, SWT.BORDER);
-		this.txtMainEditField.setBounds(0, 0, 684, 392);
 
 	}
 }
