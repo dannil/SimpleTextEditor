@@ -1,6 +1,7 @@
 <project name="SimpleTextEditor" basedir="." default="clean-build">
 
     <property name="src.dir" value="src" />
+	<property name="resources.dir" value="${src.dir}/main/resources"></property>
 
 	<!-- Version numbers and other useful stuff goes here -->
 	<property name="app.version">0.1</property>
@@ -61,6 +62,7 @@
             <zipgroupfileset dir="${lib.dir}" includes="**/jar-in-jar-loader.jar" />
             <zipfileset dir="${lib.swt.dir}" includes="**/swt-${swt.version}_linux_gtk_x86.jar" />
         	<zipfileset dir="${lib.dir}" includes="**/*.jar" excludes="**/jar-in-jar-loader.jar, **/swt/*" />
+        	<zipfileset dir="${resources.dir}" includes="**/*"/>
         </jar>
         <!-- Linux 64bit -->
         <jar destfile="${jar.dir}/${ant.project.name}-${app.version}_linux_gtk_x64.jar" basedir="${classes.dir}">
@@ -100,6 +102,7 @@
             <zipgroupfileset dir="${lib.dir}" includes="**/jar-in-jar-loader.jar" />
             <zipfileset dir="${lib.swt.dir}" includes="**/swt-${swt.version}_win32_x64.jar" />
         	<zipfileset dir="${lib.dir}" includes="**/*.jar" excludes="**/jar-in-jar-loader.jar, **/swt/*" />
+        	<zipfileset dir="${resources.dir}" includes="**/*"/>
         </jar>
         <!-- MacOS 32bit -->
         <jar destfile="${jar.dir}/${ant.project.name}-${app.version}_macosx_x86.jar" basedir="${classes.dir}">
