@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public final class ApplicationView {
 
@@ -66,8 +68,8 @@ public final class ApplicationView {
 	 */
 	protected void createContents() {
 		this.shell = new Shell();
-		this.shell.setSize(700, 451);
-		this.shell.setText("Simple Text Editor");
+		this.shell.setSize(700, 450);
+		this.shell.setText("SimpleTextEditor");
 		this.shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		Menu menu = new Menu(this.shell, SWT.BAR);
@@ -97,13 +99,16 @@ public final class ApplicationView {
 	    new MenuItem(mnFile, SWT.SEPARATOR);
 		
 		MenuItem mntmExit = new MenuItem(mnFile, SWT.PUSH);
+		mntmExit.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				ApplicationView.this.shell.getDisplay().dispose();
+			}
+		});
 		mntmExit.setText("Exit");
 		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mntmExit.setImage(imgExit);
 		
 		this.txtMainEditField = new Text(this.shell, SWT.BORDER);
-
-		
-		//force new build
 	}
 }
