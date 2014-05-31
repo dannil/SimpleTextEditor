@@ -1,6 +1,9 @@
 package org.dannil.simpletexteditor;
 
+import java.util.ResourceBundle;
+
 import org.dannil.simpletexteditor.controller.ApplicationController;
+import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -14,6 +17,8 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public final class ApplicationView {
 
+	private final ResourceBundle languageBundle;
+	
 	private final ApplicationController applicationController;
 	
 	protected Shell shell;
@@ -38,6 +43,7 @@ public final class ApplicationView {
 	 * Constructor
 	 */
 	public ApplicationView() {
+		this.languageBundle = LanguageUtility.getDisplayLanguageBundle();
 		this.applicationController = new ApplicationController();
 	}
 	
@@ -70,7 +76,7 @@ public final class ApplicationView {
 		this.shell.setMenuBar(menu);
 		
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
-		mntmFile.setText("File");
+		mntmFile.setText("");
 		
 		Menu mnFile = new Menu(mntmFile);
 		mntmFile.setMenu(mnFile);
@@ -103,6 +109,6 @@ public final class ApplicationView {
 		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mntmExit.setImage(imgExit);
 		
-		this.txtMainEditField = new Text(this.shell, SWT.BORDER);
+		this.txtMainEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);
 	}
 }
