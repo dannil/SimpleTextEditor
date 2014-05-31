@@ -51,7 +51,6 @@ public class App extends JFrame {
 					"euismod, vitae iaculis elit commodo. Vivamus malesuada tristique volutpat. Praesent elit elit, ornare a erat vel, lobortis condimentum est. Nulla pretium " +
 					"malesuada justo ut tristique. Sed iaculis lacus ultrices, lobortis nibh a, convallis dui. Fusce varius orci ultrices elit gravida auctor. ";
 	
-	private MenuAction action;
 	private JMenuBar menuBar;
 	private JToolBar menuToolBar;
 	private JTabbedPane tabbedPane;
@@ -69,7 +68,6 @@ public class App extends JFrame {
 		setLayout(new BorderLayout());
 		
 		//Declare OO objects that's used through the document
-		this.action = new MenuAction();
 		this.menuBar = new JMenuBar();
 		this.menuToolBar = new JToolBar();
 		this.tabbedPane = new JTabbedPane();
@@ -109,7 +107,7 @@ public class App extends JFrame {
         fileNew.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		actionNew();
+        		//actionNew();
         	}
         });
         
@@ -119,7 +117,7 @@ public class App extends JFrame {
         fileOpen.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		actionOpen();
+        		//actionOpen();
         	}
         });
 
@@ -129,7 +127,7 @@ public class App extends JFrame {
         fileSave.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		actionSave();
+        		//actionSave();
         	}
         });
 		
@@ -171,29 +169,23 @@ public class App extends JFrame {
         	}
         });*/
         
-        //Icon action toolbar
-        ImageIcon iconNew = new ImageIcon(getClass().getResource("images/new.png"));
-		ImageIcon iconOpen = new ImageIcon(getClass().getResource("images/open.png"));
-		ImageIcon iconSave = new ImageIcon(getClass().getResource("images/save.png"));
-		ImageIcon iconExit = new ImageIcon(getClass().getResource("images/exit.png"));
-        
-		JButton btnNew = new JButton(iconNew);
+		JButton btnNew = new JButton();
         btnNew.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		actionNew();
+        		//actionNew();
         	}
         });
 		
-		JButton btnOpen = new JButton(iconOpen);
+		JButton btnOpen = new JButton();
         btnOpen.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		actionOpen();
+        		//actionOpen();
         	}
         });
 		
-		JButton btnSave = new JButton(iconSave);
+		JButton btnSave = new JButton();
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -319,31 +311,6 @@ public class App extends JFrame {
 		JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         return scroll;
-    }
-    
-    public void actionNew() {
-		this.action.actionNewActionListener();
-		setTitle(this.action.getAppTitle());
-		this.tabbedPane.addTab("*new", createInnerTextArea("", this.textArray[this.tabbedPane.getTabCount()]));
-		this.tabbedPane.setTitleAt(this.tabbedPane.getTabCount() - 1, "*new");
-		this.tabbedPane.setSelectedIndex(this.tabbedPane.getTabCount() - 1);
-		this.textArray[this.activeTab].setText("ID: " + this.tabbedPane.getSelectedIndex());
-		this.textArray[this.activeTab].requestFocus();
-		//textArray[activeTab].setText(action.getTextAreaContent());
-    }
-    
-    public void actionOpen() {
-		this.action.actionOpenActionListener();
-		setTitle(this.action.getAppTitle());
-		this.tabbedPane.setTitleAt(this.tabbedPane.getSelectedIndex(), this.action.getFileName());
-		this.textArray[this.activeTab].setText(this.action.getTextAreaContent());
-		this.textArray[this.activeTab].requestFocus();
-    }
-    
-    public void actionSave() {
-		this.action.actionSaveActionListener(this.textArray[this.activeTab]);
-		setTitle(this.action.getAppTitle());
-		this.textArray[this.activeTab].requestFocus();
     }
 	
 	public static void main(String[] args) {
