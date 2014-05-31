@@ -43,7 +43,7 @@ public final class ApplicationView {
 	 * Constructor
 	 */
 	public ApplicationView() {
-		this.languageBundle = LanguageUtility.getDisplayLanguageBundle();
+		this.languageBundle = LanguageUtility.getDefault();
 		this.applicationController = new ApplicationController();
 	}
 	
