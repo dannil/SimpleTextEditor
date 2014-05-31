@@ -288,11 +288,6 @@ public class App extends JFrame {
 		//General JFrame options
         setTitle(applicationName + " - *new");
         BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResource("/images/icon32.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         setIconImage(image);
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         setSize((int)(size.getWidth() / 1.7), (int)(size.getHeight() / 1.4));
