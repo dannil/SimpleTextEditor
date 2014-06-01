@@ -10,6 +10,8 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Event {
 	
+	private final String[] FILTER_EXT = { "*.txt", /*"*.doc", ".rtf", "*.*"*/ };
+	
 	//ResourceBundle languageBundle;
 	
 	public Event() {
@@ -20,8 +22,7 @@ public class Event {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
         fd.setText("Open");
         fd.setFilterPath("C:/");
-        String[] filterExt = { "*.txt", /*"*.doc", ".rtf", "*.*"*/ };
-        fd.setFilterExtensions(filterExt);
+        fd.setFilterExtensions(this.FILTER_EXT);
         String selected = fd.open();
         //System.out.println(selected);
         if (selected != null) {
