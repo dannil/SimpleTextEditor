@@ -17,12 +17,12 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public final class ApplicationView {
 
-	private final ResourceBundle languageBundle;
+	//private final ResourceBundle languageBundle;
 	
-	private final ApplicationController applicationController;
+	final ApplicationController applicationController;
 	
 	protected Shell shell;
-	private Text txtMainEditField;
+	protected Text txtEditField;
 
 	/**
 	 * Launch the application.
@@ -43,7 +43,7 @@ public final class ApplicationView {
 	 * Constructor
 	 */
 	public ApplicationView() {
-		this.languageBundle = LanguageUtility.getDefault();
+		//this.languageBundle = LanguageUtility.getDefault();
 		this.applicationController = new ApplicationController();
 	}
 	
@@ -76,7 +76,7 @@ public final class ApplicationView {
 		this.shell.setMenuBar(menu);
 		
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
-		mntmFile.setText("");
+		mntmFile.setText("File");
 		
 		Menu mnFile = new Menu(mntmFile);
 		mntmFile.setMenu(mnFile);
@@ -87,6 +87,12 @@ public final class ApplicationView {
 		mntmNew.setImage(imgNew);
 		
 		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
+		mntmOpen.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				ApplicationView.this.txtEditField.setText(ApplicationView.this.applicationController.openFile(ApplicationView.this.shell));
+			}
+		});
 		mntmOpen.setText("Open");
 		Image imgOpen = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
 		mntmOpen.setImage(imgOpen);
@@ -109,6 +115,15 @@ public final class ApplicationView {
 		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mntmExit.setImage(imgExit);
 		
-		this.txtMainEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);
+		MenuItem mntmEdit = new MenuItem(menu, SWT.CASCADE);
+		mntmEdit.setText("Edit");
+		
+		Menu mnEdit = new Menu(mntmEdit);
+		mntmEdit.setMenu(mnEdit);
+		
+		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
+		mntmUndo.setText("Undo");
+		
+		this.txtEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);
 	}
 }
