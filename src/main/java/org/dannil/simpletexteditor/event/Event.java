@@ -1,7 +1,12 @@
 package org.dannil.simpletexteditor.event;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.SWT;
@@ -18,29 +23,30 @@ public class Event {
 		//languageBundle = LanguageUtility.getDefault();
 	}
 	
-	public String openFile(Shell shell) {
+	public String openFile(Shell shell) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
-        fd.setText("Open");
+        fd.setText("Open file");
         fd.setFilterPath("C:/");
         fd.setFilterExtensions(this.FILTER_EXT);
-        String selected = fd.open();
-        //System.out.println(selected);
-        if (selected != null) {
-            // Append all the selected files. Since getFileNames() returns only 
-            // the names, and not the path, prepend the path, normalizing
-            // if necessary
-            StringBuffer buf = new StringBuffer();
-            String[] files = fd.getFileNames();
-            for (int i = 0, n = files.length; i < n; i++) {
-            	buf.append(fd.getFilterPath());
-            	if (buf.charAt(buf.length() - 1) != File.separatorChar) {
-            		buf.append(File.separatorChar);
-            	}
-            	buf.append(files[i]);
-            	buf.append(" ");
-            }
-            return buf.toString();
+        String path = fd.open();
+        if (path != null) {
+        	File file = new File(path);
+        	System.out.println(file.toString());
+        	BufferedReader br = new BufferedReader(new FileReader(file));
+         
+        	String content = "";
+        	String line = null;
+        	while ((line = br.readLine()) != null) {
+        		content += line;
+        		content += System.getProperty("line.separator");
+        		System.out.println(line);
+        	}
+        	
+        	br.close();
+        	
+        	return content;
         }
+        System.out.println("File non-existant.");
 		return "";
 	}
 	

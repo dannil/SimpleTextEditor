@@ -1,5 +1,6 @@
 package org.dannil.simpletexteditor;
 
+import java.io.File;
 import java.util.ResourceBundle;
 
 import org.dannil.simpletexteditor.controller.ApplicationController;
@@ -90,7 +91,9 @@ public final class ApplicationView {
 		mntmOpen.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				ApplicationView.this.txtEditField.setText(ApplicationView.this.applicationController.openFile(ApplicationView.this.shell));
+				String file = ApplicationView.this.applicationController.openFile(ApplicationView.this.shell);
+				System.out.println(file);
+				ApplicationView.this.txtEditField.setText(file);
 			}
 		});
 		mntmOpen.setText("Open");
