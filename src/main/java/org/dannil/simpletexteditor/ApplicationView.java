@@ -17,7 +17,7 @@ public final class ApplicationView {
 
 	//private final ResourceBundle languageBundle;
 	
-	final ApplicationController applicationController;
+	protected final ApplicationController applicationController;
 	
 	protected Shell shell;
 	protected Text txtEditField;
@@ -31,8 +31,7 @@ public final class ApplicationView {
 			ApplicationView window = new ApplicationView();
 			window.open();
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -146,6 +145,7 @@ public final class ApplicationView {
 		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
 		mntmUndo.setText("Undo");
 		
+		// Text EditField
 		this.txtEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);
 		this.txtEditField.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 	}

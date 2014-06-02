@@ -2,15 +2,15 @@ package org.dannil.simpletexteditor.controller;
 
 import java.io.IOException;
 
-import org.dannil.simpletexteditor.event.MenuEvent;
+import org.dannil.simpletexteditor.event.Event;
 import org.eclipse.swt.widgets.Shell;
 
 public final class ApplicationController {
 
-	MenuEvent event;
+	Event event;
 	
 	public ApplicationController() {
-		this.event = new MenuEvent();
+		this.event = new Event();
 	}
 	
 	public String openFile(Shell shell) {
