@@ -1,7 +1,11 @@
 package org.dannil.simpletexteditor;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ResourceBundle;
+
+import javax.swing.KeyStroke;
 
 import org.dannil.simpletexteditor.controller.ApplicationController;
 import org.dannil.simpletexteditor.utility.LanguageUtility;
@@ -9,12 +13,15 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public final class ApplicationView {
 
@@ -76,47 +83,64 @@ public final class ApplicationView {
 		Menu menu = new Menu(this.shell, SWT.BAR);
 		this.shell.setMenuBar(menu);
 		
+		// Cascading MenuItem File
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
 		mntmFile.setText("File");
 		
+		// Menu File
 		Menu mnFile = new Menu(mntmFile);
 		mntmFile.setMenu(mnFile);
 
+		// MenuItem New
 		MenuItem mntmNew = new MenuItem(mnFile, SWT.PUSH);
-		mntmNew.setText("New");
+		mntmNew.setText("New\tCtrl+N");
+		mntmNew.setAccelerator(SWT.MOD1 + 'N');
 		Image imgNew = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
 		mntmNew.setImage(imgNew);
-		
-		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
-		mntmOpen.addSelectionListener(new SelectionAdapter() {
+		mntmNew.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void widgetSelected(SelectionEvent arg0) {
+			public void handleEvent(Event e) {
+				System.out.println("New selected");
+			}
+		});
+		
+		// MenuItem Open
+		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
+		mntmOpen.setText("Open\tCtrl+O");
+		mntmOpen.setAccelerator(SWT.MOD1 + 'O');
+		Image imgOpen = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
+		mntmOpen.setImage(imgOpen);
+		mntmOpen.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event e) {
+				System.out.println("Open selected");
 				String file = ApplicationView.this.applicationController.openFile(ApplicationView.this.shell);
 				System.out.println(file);
 				ApplicationView.this.txtEditField.setText(file);
 			}
 		});
-		mntmOpen.setText("Open");
-		Image imgOpen = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
-		mntmOpen.setImage(imgOpen);
 		
+		// MenuItem Save
 		MenuItem mntmSave = new MenuItem(mnFile, SWT.PUSH);
-		mntmSave.setText("Save");
+		mntmSave.setText("Save\tCtrl+S");
+		mntmSave.setAccelerator(SWT.MOD1 + 'S');
 		Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
 		mntmSave.setImage(imgSave);
 		
 	    new MenuItem(mnFile, SWT.SEPARATOR);
 		
+	    // MenuItem Exit
 		MenuItem mntmExit = new MenuItem(mnFile, SWT.PUSH);
-		mntmExit.addSelectionListener(new SelectionAdapter() {
+		mntmExit.setText("Exit\tAlt+F4");
+		//mntmExit.setAccelerator(SWT.MOD3 + 'F4');
+		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
+		mntmExit.setImage(imgExit);
+		mntmExit.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void widgetSelected(SelectionEvent arg0) {
+			public void handleEvent(Event e) {
 				ApplicationView.this.shell.getDisplay().dispose();
 			}
 		});
-		mntmExit.setText("Exit");
-		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
-		mntmExit.setImage(imgExit);
 		
 		MenuItem mntmEdit = new MenuItem(menu, SWT.CASCADE);
 		mntmEdit.setText("Edit");
@@ -128,5 +152,6 @@ public final class ApplicationView {
 		mntmUndo.setText("Undo");
 		
 		this.txtEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);
+		this.txtEditField.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 	}
 }
