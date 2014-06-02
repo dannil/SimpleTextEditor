@@ -198,6 +198,7 @@ public class App extends JFrame {
 		
 		//Tab bar
 		this.tabbedPane.addChangeListener(new ChangeListener() {
+			@SuppressWarnings("synthetic-access")
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				App.this.activeTab = App.this.tabbedPane.getSelectedIndex();
@@ -207,6 +208,7 @@ public class App extends JFrame {
 		
 		//Text area
 		addWindowListener(new WindowAdapter() {
+			@SuppressWarnings("synthetic-access")
 			public void windowOpened(WindowEvent e) {
 				App.this.textArray[App.this.activeTab].requestFocus();
 			}
@@ -214,7 +216,8 @@ public class App extends JFrame {
 		
 		Document doc = this.textArray[this.activeTab].getDocument();
 		doc.addUndoableEditListener(new UndoableEditListener() {
-		    @Override
+		    @SuppressWarnings("synthetic-access")
+			@Override
 		    public void undoableEditHappened(UndoableEditEvent e) {
 		        //System.out.println("Add edit");
 		        App.this.undoManager.addEdit(e.getEdit());
@@ -228,6 +231,7 @@ public class App extends JFrame {
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
 
 		am.put("Undo", new AbstractAction() {
+			@SuppressWarnings("synthetic-access")
 			@Override
 		    public void actionPerformed(ActionEvent e) {
 	            if (App.this.undoManager.canUndo()) {
@@ -236,7 +240,8 @@ public class App extends JFrame {
 		    }
 		});
 		am.put("Redo", new AbstractAction() {
-		    @Override
+		    @SuppressWarnings("synthetic-access")
+			@Override
 		    public void actionPerformed(ActionEvent e) {
 	            if (App.this.undoManager.canRedo()) {
 	                App.this.undoManager.redo();
