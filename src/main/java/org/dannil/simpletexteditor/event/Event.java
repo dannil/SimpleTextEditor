@@ -31,15 +31,13 @@ public class Event {
         String path = fd.open();
         if (path != null) {
         	File file = new File(path);
-        	System.out.println(file.toString());
         	BufferedReader br = new BufferedReader(new FileReader(file));
          
         	String content = "";
         	String line = null;
         	while ((line = br.readLine()) != null) {
         		content += line;
-        		content += System.getProperty("line.separator");
-        		System.out.println(line);
+    			content += System.getProperty("line.separator");
         	}
         	
         	br.close();
