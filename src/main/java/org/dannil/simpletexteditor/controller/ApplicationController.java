@@ -1,7 +1,5 @@
 package org.dannil.simpletexteditor.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.dannil.simpletexteditor.event.MenuEvent;

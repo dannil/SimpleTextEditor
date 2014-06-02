@@ -1,14 +1,6 @@
 package org.dannil.simpletexteditor;
 
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.util.ResourceBundle;
-
-import javax.swing.KeyStroke;
-
 import org.dannil.simpletexteditor.controller.ApplicationController;
-import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -19,8 +11,6 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public final class ApplicationView {

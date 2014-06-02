@@ -2,13 +2,9 @@ package org.dannil.simpletexteditor.event;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ResourceBundle;
-import java.util.Scanner;
 
-import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
