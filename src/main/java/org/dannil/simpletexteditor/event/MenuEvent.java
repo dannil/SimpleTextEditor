@@ -13,14 +13,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
-public class Event {
+public class MenuEvent {
 	
 	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
 	private final String[] FILTER_EXT = { "*.txt", "*.html;*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
 	
 	//ResourceBundle languageBundle;
 	
-	public Event() {
+	public MenuEvent() {
 		//languageBundle = LanguageUtility.getDefault();
 	}
 	

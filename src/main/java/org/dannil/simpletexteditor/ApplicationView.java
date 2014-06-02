@@ -80,6 +80,7 @@ public final class ApplicationView {
 		this.shell.setText("SimpleTextEditor");
 		this.shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
+		// Top Menu
 		Menu menu = new Menu(this.shell, SWT.BAR);
 		this.shell.setMenuBar(menu);
 		
@@ -114,9 +115,9 @@ public final class ApplicationView {
 			@Override
 			public void handleEvent(Event e) {
 				System.out.println("Open selected");
-				String file = ApplicationView.this.applicationController.openFile(ApplicationView.this.shell);
+				String file;
+				ApplicationView.this.txtEditField.setText(file = ApplicationView.this.applicationController.openFile(ApplicationView.this.shell));
 				System.out.println(file);
-				ApplicationView.this.txtEditField.setText(file);
 			}
 		});
 		
@@ -127,6 +128,7 @@ public final class ApplicationView {
 		Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
 		mntmSave.setImage(imgSave);
 		
+		// Separator between Save and Exit
 	    new MenuItem(mnFile, SWT.SEPARATOR);
 		
 	    // MenuItem Exit
@@ -142,12 +144,15 @@ public final class ApplicationView {
 			}
 		});
 		
+		// Cascading MenuItem Edit
 		MenuItem mntmEdit = new MenuItem(menu, SWT.CASCADE);
 		mntmEdit.setText("Edit");
 		
+		// Menu Edit
 		Menu mnEdit = new Menu(mntmEdit);
 		mntmEdit.setMenu(mnEdit);
 		
+		// MenuItem Undo
 		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
 		mntmUndo.setText("Undo");
 		

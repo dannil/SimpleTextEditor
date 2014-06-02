@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.dannil.simpletexteditor.event.Event;
+import org.dannil.simpletexteditor.event.MenuEvent;
 import org.eclipse.swt.widgets.Shell;
 
 public final class ApplicationController {
 
-	Event event;
+	MenuEvent event;
 	
 	public ApplicationController() {
-		this.event = new Event();
+		this.event = new MenuEvent();
 	}
 	
 	public String openFile(Shell shell) {
