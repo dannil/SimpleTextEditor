@@ -15,7 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Event {
 	
-	private final String[] FILTER_EXT = { "*.txt", /*"*.doc", ".rtf", "*.*"*/ };
+	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
+	private final String[] FILTER_EXT = { "*.txt", "*.html;*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
 	
 	//ResourceBundle languageBundle;
 	
@@ -27,6 +28,7 @@ public class Event {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
         fd.setText("Open file");
         fd.setFilterPath("C:/");
+        fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
         String path = fd.open();
         if (path != null) {
