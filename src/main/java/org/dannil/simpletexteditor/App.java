@@ -28,6 +28,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
@@ -228,6 +229,8 @@ public class App extends JFrame {
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
 
 		am.put("Undo", new AbstractAction() {
+			private static final long serialVersionUID = -5930871217841910778L;
+
 			@SuppressWarnings("synthetic-access")
 			@Override
 		    public void actionPerformed(ActionEvent e) {
@@ -237,7 +240,9 @@ public class App extends JFrame {
 		    }
 		});
 		am.put("Redo", new AbstractAction() {
-		    @SuppressWarnings("synthetic-access")
+			private static final long serialVersionUID = 1182297259855206101L;
+
+			@SuppressWarnings("synthetic-access")
 			@Override
 		    public void actionPerformed(ActionEvent e) {
 	            if (App.this.undoManager.canRedo()) {
@@ -305,7 +310,7 @@ public class App extends JFrame {
         area.setMargin(new Insets(1, 1, 1, 1));
         area.requestFocusInWindow();
         
-		JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane scroll = new JScrollPane(area, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         return scroll;
     }

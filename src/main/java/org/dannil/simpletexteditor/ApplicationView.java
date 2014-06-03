@@ -1,6 +1,9 @@
 package org.dannil.simpletexteditor;
 
+import java.util.ResourceBundle;
+
 import org.dannil.simpletexteditor.controller.ApplicationController;
+import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -15,7 +18,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 public final class ApplicationView {
 
-	//private final ResourceBundle languageBundle;
+	private final ResourceBundle languageBundle;
 	
 	protected final ApplicationController applicationController;
 	
@@ -41,6 +44,7 @@ public final class ApplicationView {
 	 */
 	public ApplicationView() {
 		//this.languageBundle = LanguageUtility.getDefault();
+		this.languageBundle = LanguageUtility.getDefault();
 		this.applicationController = new ApplicationController();
 	}
 	
@@ -75,7 +79,7 @@ public final class ApplicationView {
 		
 		// Cascading MenuItem File
 		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
-		mntmFile.setText("File");
+		mntmFile.setText(this.languageBundle.getString("file"));
 		
 		// Menu File
 		Menu mnFile = new Menu(mntmFile);
@@ -83,7 +87,7 @@ public final class ApplicationView {
 
 		// MenuItem New
 		MenuItem mntmNew = new MenuItem(mnFile, SWT.PUSH);
-		mntmNew.setText("New\tCtrl+N");
+		mntmNew.setText(this.languageBundle.getString("new") + "\tCtrl+N");
 		mntmNew.setAccelerator(SWT.MOD1 + 'N');
 		Image imgNew = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
 		mntmNew.setImage(imgNew);
@@ -96,7 +100,7 @@ public final class ApplicationView {
 		
 		// MenuItem Open
 		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
-		mntmOpen.setText("Open\tCtrl+O");
+		mntmOpen.setText(this.languageBundle.getString("open") + "\tCtrl+O");
 		mntmOpen.setAccelerator(SWT.MOD1 + 'O');
 		Image imgOpen = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
 		mntmOpen.setImage(imgOpen);
@@ -112,7 +116,7 @@ public final class ApplicationView {
 		
 		// MenuItem Save
 		MenuItem mntmSave = new MenuItem(mnFile, SWT.PUSH);
-		mntmSave.setText("Save\tCtrl+S");
+		mntmSave.setText(this.languageBundle.getString("save") + "\tCtrl+S");
 		mntmSave.setAccelerator(SWT.MOD1 + 'S');
 		Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
 		mntmSave.setImage(imgSave);
@@ -122,7 +126,7 @@ public final class ApplicationView {
 		
 	    // MenuItem Exit
 		MenuItem mntmExit = new MenuItem(mnFile, SWT.PUSH);
-		mntmExit.setText("Exit\tAlt+F4");
+		mntmExit.setText(this.languageBundle.getString("exit") + "\tAlt+F4");
 		//mntmExit.setAccelerator(SWT.MOD3 + 'F4');
 		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mntmExit.setImage(imgExit);
@@ -135,7 +139,7 @@ public final class ApplicationView {
 		
 		// Cascading MenuItem Edit
 		MenuItem mntmEdit = new MenuItem(menu, SWT.CASCADE);
-		mntmEdit.setText("Edit");
+		mntmEdit.setText(this.languageBundle.getString("edit"));
 		
 		// Menu Edit
 		Menu mnEdit = new Menu(mntmEdit);
@@ -143,7 +147,7 @@ public final class ApplicationView {
 		
 		// MenuItem Undo
 		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
-		mntmUndo.setText("Undo");
+		mntmUndo.setText(this.languageBundle.getString("undo"));
 		
 		// Text EditField
 		this.txtEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);

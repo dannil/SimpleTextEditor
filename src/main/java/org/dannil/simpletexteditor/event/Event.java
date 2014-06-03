@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
+import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -14,20 +16,21 @@ public class Event {
 	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
 	private final String[] FILTER_EXT = { "*.txt", "*.html;*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
 	
-	//ResourceBundle languageBundle;
+	ResourceBundle languageBundle;
 	
 	public Event() {
-		//languageBundle = LanguageUtility.getDefault();
+		this.languageBundle = LanguageUtility.getDefault();
 	}
 	
 	public String openFile(Shell shell) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
-        fd.setText("Open file");
+        fd.setText(this.languageBundle.getString("open.file"));
         fd.setFilterPath("C:/");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
         String path = fd.open();
-        if (path != null) {
+        if (path != null) ;
+        {
         	File file = new File(path);
         	BufferedReader br = new BufferedReader(new FileReader(file));
          
@@ -42,8 +45,8 @@ public class Event {
         	
         	return content;
         }
-        System.out.println("File non-existant.");
-		return "";
+        //System.out.println("File non-existant.");
+		//return "";
 	}
 	
 }

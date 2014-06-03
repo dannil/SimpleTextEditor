@@ -6,15 +6,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public final class LanguageUtility {
-	private static String LANGUAGE_PATH = "/languages";
+	private static String LANGUAGE_PATH = "languages/language";
 	
 	private static List<Locale> availableLanguages;
 	
 	static {
 		System.out.println("Initializing languages...");
 		availableLanguages = new ArrayList<Locale>();
-		//availableLanguages.add(new Locale("en", "US"));
-		//availableLanguages.add(new Locale("sv", "SE"));
+		availableLanguages.add(new Locale("en", "US"));
+		availableLanguages.add(new Locale("sv", "SE"));
 		System.out.println("Done.");
 	}
 	
