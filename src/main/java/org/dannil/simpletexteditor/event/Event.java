@@ -29,8 +29,7 @@ public class Event {
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
         String path = fd.open();
-        if (path != null) ;
-        {
+        if (path != null) {
         	File file = new File(path);
         	BufferedReader br = new BufferedReader(new FileReader(file));
          
@@ -45,6 +44,7 @@ public class Event {
         	
         	return content;
         }
+        return "";
         //System.out.println("File non-existant.");
 		//return "";
 	}
