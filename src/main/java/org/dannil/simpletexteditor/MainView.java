@@ -93,7 +93,7 @@ public final class MainView {
 		mntmNew.setImage(imgNew);
 		mntmNew.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void handleEvent(Event e) {
+			public void handleEvent(Event event) {
 				System.out.println("New selected");
 			}
 		});
@@ -106,7 +106,7 @@ public final class MainView {
 		mntmOpen.setImage(imgOpen);
 		mntmOpen.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void handleEvent(Event e) {
+			public void handleEvent(Event event) {
 				System.out.println("Open selected");
 				String file;
 				MainView.this.txtEditField.setText(file = MainView.this.applicationController.openFile(MainView.this.shell));
@@ -132,7 +132,7 @@ public final class MainView {
 		mntmExit.setImage(imgExit);
 		mntmExit.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void handleEvent(Event e) {
+			public void handleEvent(Event event) {
 				MainView.this.shell.getDisplay().dispose();
 			}
 		});
