@@ -25,7 +25,7 @@ public class Event {
 	public String openFile(Shell shell) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
         fd.setText(this.languageBundle.getString("open.file"));
-        fd.setFilterPath("C:/");
+        fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
         String path = fd.open();
