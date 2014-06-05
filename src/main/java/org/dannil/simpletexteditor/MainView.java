@@ -151,6 +151,10 @@ public final class MainView {
 		
 		// Text EditField
 		this.txtEditField = new StyledText(this.shell, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL);
+		this.txtEditField.setTopMargin(4);
+		this.txtEditField.setBottomMargin(4);
+		this.txtEditField.setRightMargin(4);
+		this.txtEditField.setLeftMargin(4);
 		this.txtEditField.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		this.txtEditField.setAlwaysShowScrollBars(false);
 	}
