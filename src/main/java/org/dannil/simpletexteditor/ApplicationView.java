@@ -4,7 +4,10 @@ import java.util.ResourceBundle;
 
 import org.dannil.simpletexteditor.controller.ApplicationController;
 import org.dannil.simpletexteditor.utility.LanguageUtility;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
@@ -15,6 +18,9 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.CoolBar;
 
 public final class ApplicationView {
 
@@ -23,7 +29,7 @@ public final class ApplicationView {
 	protected final ApplicationController applicationController;
 	
 	protected Shell shell;
-	protected Text txtEditField;
+	protected StyledText txtEditField;
 
 	/**
 	 * Launch the application.
@@ -69,7 +75,7 @@ public final class ApplicationView {
 	 */
 	protected void createContents() {
 		this.shell = new Shell();
-		this.shell.setSize(700, 450);
+		this.shell.setSize(960, 540);
 		this.shell.setText("SimpleTextEditor");
 		this.shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
@@ -147,10 +153,11 @@ public final class ApplicationView {
 		
 		// MenuItem Undo
 		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
-		mntmUndo.setText(this.languageBundle.getString("undo"));
+		mntmUndo.setText(this.languageBundle.getString("undo") + "\tCtrl+Z");
 		
 		// Text EditField
-		this.txtEditField = new Text(this.shell, SWT.WRAP | SWT.MULTI);
+		this.txtEditField = new StyledText(this.shell, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL);
 		this.txtEditField.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
+		this.txtEditField.setAlwaysShowScrollBars(false);
 	}
 }
