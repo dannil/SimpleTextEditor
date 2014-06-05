@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.dannil.simpletexteditor.event.Event;
 import org.eclipse.swt.widgets.Shell;
 
-public final class ApplicationController {
+public final class MainController {
 
 	Event event;
 	
-	public ApplicationController() {
+	public MainController() {
 		this.event = new Event();
 	}
 	

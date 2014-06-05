@@ -2,7 +2,7 @@ package org.dannil.simpletexteditor;
 
 import java.util.ResourceBundle;
 
-import org.dannil.simpletexteditor.controller.ApplicationController;
+import org.dannil.simpletexteditor.controller.MainController;
 import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
@@ -22,11 +22,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.CoolBar;
 
-public final class ApplicationView {
+public final class MainView {
 
 	private final ResourceBundle languageBundle;
 	
-	protected final ApplicationController applicationController;
+	protected final MainController applicationController;
 	
 	protected Shell shell;
 	protected StyledText txtEditField;
@@ -37,7 +37,7 @@ public final class ApplicationView {
 	 */
 	public static void main(String[] args) {
 		try {
-			ApplicationView window = new ApplicationView();
+			MainView window = new MainView();
 			window.open();
 		}
 		catch (Exception e) {
@@ -48,10 +48,10 @@ public final class ApplicationView {
 	/**
 	 * Constructor
 	 */
-	public ApplicationView() {
+	public MainView() {
 		//this.languageBundle = LanguageUtility.getDefault();
 		this.languageBundle = LanguageUtility.getDefault();
-		this.applicationController = new ApplicationController();
+		this.applicationController = new MainController();
 	}
 	
 	
@@ -115,7 +115,7 @@ public final class ApplicationView {
 			public void handleEvent(Event e) {
 				System.out.println("Open selected");
 				String file;
-				ApplicationView.this.txtEditField.setText(file = ApplicationView.this.applicationController.openFile(ApplicationView.this.shell));
+				MainView.this.txtEditField.setText(file = MainView.this.applicationController.openFile(MainView.this.shell));
 				System.out.println(file);
 			}
 		});
@@ -139,7 +139,7 @@ public final class ApplicationView {
 		mntmExit.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event e) {
-				ApplicationView.this.shell.getDisplay().dispose();
+				MainView.this.shell.getDisplay().dispose();
 			}
 		});
 		
