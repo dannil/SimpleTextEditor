@@ -110,7 +110,7 @@ public final class MainView {
 				System.out.println("Open selected");
 				String file;
 				MainView.this.txtEditField.setText(file = MainView.this.applicationController.openFile(MainView.this.shell));
-				System.out.println(file);
+				System.out.print(file);
 			}
 		});
 		
