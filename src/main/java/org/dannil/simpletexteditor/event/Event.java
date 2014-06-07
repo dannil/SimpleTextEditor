@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Event {
 	
-	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html)", "XHTML (*.xhtml)" };
-	private final String[] FILTER_EXT = { "*.txt", "*.html", "*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
+	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
+	private final String[] FILTER_EXT = { "*.txt", "*.html;*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
 	
 	ResourceBundle languageBundle;
 	
@@ -88,10 +88,13 @@ public class Event {
         fd.setFileName(fileName);
         
         for (int i = 0; i < this.FILTER_EXT.length; i++) {
-        	if (("*." + fileExtension).equals(this.FILTER_EXT[i])) {
+        	//System.out.println("Stored ext: " + this.FILTER_EXT[i]);
+        	//System.out.println("Supplied ext: " + ("*." + fileExtension));
+        	if (this.FILTER_EXT[i].contains(("*." + fileExtension))) {
                 fd.setFilterIndex(i);
         	}
         }
+        //System.out.println(fd.getFilterIndex());
         
 		String path = fd.open();
 		if (path != null) {
