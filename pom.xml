@@ -3,7 +3,6 @@
 	<groupId>SimpleTextEditor</groupId>
 	<artifactId>SimpleTextEditor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
 	<build>
 		<plugins>
 			<plugin>
@@ -16,5 +15,14 @@
 			</plugin>
 		</plugins>
 	</build>
-
+  
+	<dependencies>
+	
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>17.0</version>
+		</dependency>
+  
+	</dependencies>
 </project>
