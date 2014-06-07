@@ -25,9 +25,9 @@ public final class LanguageUtility {
 	 */
 	public static ResourceBundle getDefault() {
 		Locale displayLanguage = Locale.getDefault();
-		if (availableLanguages.contains(displayLanguage)) {
+		/*if (availableLanguages.contains(displayLanguage)) {
 			return ResourceBundle.getBundle(LANGUAGE_PATH, displayLanguage);
-		}
+		}*/
 		return ResourceBundle.getBundle(LANGUAGE_PATH, new Locale("en", "US"));
 	}
 }
