@@ -95,3 +95,4 @@ proguard/
 
 # PDT-specific
 .buildpath
+/target
