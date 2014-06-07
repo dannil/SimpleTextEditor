@@ -90,7 +90,7 @@ public class Event {
         for (int i = 0; i < this.FILTER_EXT.length; i++) {
         	//System.out.println("Stored ext: " + this.FILTER_EXT[i]);
         	//System.out.println("Supplied ext: " + ("*." + fileExtension));
-        	if (this.FILTER_EXT[i].contains(("*." + fileExtension))) {
+        	if (this.FILTER_EXT[i].contains(("*." + fileExtension).toLowerCase())) {
                 fd.setFilterIndex(i);
         	}
         }
