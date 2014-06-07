@@ -9,7 +9,7 @@
 	
     <!-- Define the necessary paths -->
     <property name="build.dir" value="bin_temp" />
-    <property name="lib.dir" value="libs" />
+    <property name="lib.dir" value="lib" />
     <property name="lib.swt.dir" value="${lib.dir}/swt" />
     <property name="classes.dir" value="${build.dir}/classes" />
     <property name="jar.dir" value="${build.dir}/jar" />
