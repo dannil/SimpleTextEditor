@@ -34,7 +34,7 @@ public class Event {
         	BufferedReader br = new BufferedReader(new FileReader(file));
          
         	String content = "";
-        	String line = null;
+        	String line = "";
         	while ((line = br.readLine()) != null) {
         		content += line;
     			content += System.getProperty("line.separator");
