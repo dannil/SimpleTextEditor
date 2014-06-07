@@ -4,7 +4,7 @@ bin/
 bin_temp/
 gen/
 target/
-lib/cache
+lib/cache/
 
 # OS Files #
 .DS_Store
