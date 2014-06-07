@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ivy-module version="2.0">
-    <info organisation="org.dannil" module="simpletexteditor" revision="working@DANIEL-PC" status="integration" publication="20140607164150"/>
-    <dependencies>
-        <dependency org="com.google.guava" name="guava" rev="17.0"/>
-        <exclude org="*" ext="*" type="source"/>
-        <exclude org="*" ext="*" type="javadoc"/>
-    </dependencies>
-</ivy-module>

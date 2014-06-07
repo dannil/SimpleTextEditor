@@ -1,4 +1,4 @@
-<project name="SimpleTextEditor" basedir="." default="clean-build">
+<project name="SimpleTextEditor" basedir="." default="clean-build" xmlns:ivy="antlib:org.apache.ivy.ant">
 
     <property name="src.dir" value="src" />
 	<property name="resources.dir" value="${src.dir}/main/resources"></property>
@@ -8,6 +8,7 @@
 	<property name="swt.version">4.3</property>
 	
     <!-- Define the necessary paths -->
+	<property name="absolute.path" value="C:\Users\Daniel\git\SimpleTextEditor" />
     <property name="build.dir" value="bin_temp" />
     <property name="lib.dir" value="lib" />
     <property name="lib.swt.dir" value="${lib.dir}/swt" />
@@ -27,8 +28,13 @@
         <delete dir="${build.dir}" />
     </target>
 
+    <target name="resolve">
+    	<property name="ivy.default.ivy.user.dir" value="${absolute.path}\lib"/>
+    	<ivy:retrieve type="jar" />
+    </target>
+	
     <!-- Compile the project -->
-    <target name="compile">
+    <target name="compile" depends="resolve">
         <mkdir dir="${classes.dir}" />
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false" />
     </target>
