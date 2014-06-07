@@ -15,7 +15,7 @@
     <property name="jar.dir" value="${build.dir}/jar" />
 
     <!-- Define the main class -->
-    <property name="main-class" value="org.dannil.simpletexteditor.ApplicationView" />
+    <property name="main-class" value="org.dannil.simpletexteditor.MainView" />
 
     <!-- Define the class path -->
     <path id="classpath">
