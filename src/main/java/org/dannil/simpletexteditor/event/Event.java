@@ -35,9 +35,13 @@ public class Event {
          
         	String content = "";
         	String line = "";
+        	int i = 0;
         	while ((line = br.readLine()) != null) {
+        		if (i > 0) {
+        			content += System.getProperty("line.separator");
+        		}
+        		i++;
         		content += line;
-    			content += System.getProperty("line.separator");
         	}
         	
         	br.close();
