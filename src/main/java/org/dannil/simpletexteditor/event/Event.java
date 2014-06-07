@@ -15,8 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Event {
 	
-	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
-	private final String[] FILTER_EXT = { "*.txt", "*.html;*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
+	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html)", "XHTML (*.xhtml)" };
+	private final String[] FILTER_EXT = { "*.txt", "*.html", "*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
 	
 	ResourceBundle languageBundle;
 	
@@ -24,7 +24,8 @@ public class Event {
 		this.languageBundle = LanguageUtility.getDefault();
 	}
 	
-	public String openFile(Shell shell) throws IOException {
+	@SuppressWarnings("resource")
+	public String[] openFile(Shell shell) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
         fd.setText(this.languageBundle.getString("open.file"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
@@ -48,13 +49,18 @@ public class Event {
         	
         	br.close();
         	
-        	return content;
+        	String[] returnValues = new String[2];
+        	returnValues[0] = path;
+        	returnValues[1] = content;
+        	
+        	return returnValues;
         }
-        return "";
+        return new String[] {"", ""};
         //System.out.println("File non-existant.");
 		//return "";
 	}
 	
+	@SuppressWarnings("resource")
 	public boolean saveFileAs(Shell shell, String content) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.SAVE);
         fd.setText(this.languageBundle.getString("save.file.as"));
@@ -69,7 +75,32 @@ public class Event {
 			output.close();
 		}
 		return false;
-		
+	}
+	
+	@SuppressWarnings("resource")
+	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) throws IOException {
+        FileDialog fd = new FileDialog(shell, SWT.SAVE);
+        fd.setText(this.languageBundle.getString("save.file.as"));
+        fd.setFilterPath("C:/Users/Daniel/Desktop");
+        fd.setFilterNames(this.FILTER_NAMES);
+        fd.setFilterExtensions(this.FILTER_EXT);
+        System.out.println(fileName);
+        fd.setFileName(fileName);
+        
+        for (int i = 0; i < this.FILTER_EXT.length; i++) {
+        	if (("*." + fileExtension).equals(this.FILTER_EXT[i])) {
+                fd.setFilterIndex(i);
+        	}
+        }
+        
+		String path = fd.open();
+		if (path != null) {
+			File file = new File(path);
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			output.write(content);
+			output.close();
+		}
+		return false;
 	}
 	
 }

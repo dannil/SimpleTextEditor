@@ -13,7 +13,7 @@ public final class MainController {
 		this.event = new Event();
 	}
 	
-	public String openFile(Shell shell) {
+	public String[] openFile(Shell shell) {
 		try {
 			return this.event.openFile(shell);
 		}
@@ -26,6 +26,16 @@ public final class MainController {
 	public boolean saveFileAs(Shell shell, String content) {
 		try {
 			return this.event.saveFileAs(shell, content);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) {
+		try {
+			return this.event.saveFileAs(shell, fileName, fileExtension, content);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

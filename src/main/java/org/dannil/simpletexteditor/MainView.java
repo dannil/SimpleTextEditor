@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import com.google.common.io.Files;
+
 public final class MainView {
 
 	private final ResourceBundle languageBundle;
@@ -24,6 +26,9 @@ public final class MainView {
 	
 	protected Shell shell;
 	protected StyledText txtEditField;
+	
+	protected String fileName;
+	protected boolean isFileSaved;
 
 	/**
 	 * Launch the application.
@@ -46,6 +51,7 @@ public final class MainView {
 		//this.languageBundle = LanguageUtility.getDefault();
 		this.languageBundle = LanguageUtility.getDefault();
 		this.applicationController = new MainController();
+		this.isFileSaved = false;
 	}
 	
 	
@@ -108,9 +114,12 @@ public final class MainView {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Open selected");
-				String file;
-				MainView.this.txtEditField.setText(file = MainView.this.applicationController.openFile(MainView.this.shell));
-				System.out.print(file);
+				MainView.this.isFileSaved = true;
+				
+				String[] values = MainView.this.applicationController.openFile(MainView.this.shell);
+				MainView.this.fileName = values[0];
+				MainView.this.txtEditField.setText(values[1]);
+				System.out.print(values[1]);
 			}
 		});
 		
@@ -123,7 +132,11 @@ public final class MainView {
 		mntmSave.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
-				
+				if (MainView.this.isFileSaved) {
+					// Do not prompt user as file is already on the file system
+				} else {
+					// Prompt user to save a new file
+				}
 			}
 		});
 		
@@ -136,8 +149,21 @@ public final class MainView {
 		mntmSaveAs.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
+				System.out.println(MainView.this.isFileSaved);
 				System.out.println("Save as selected");
-				boolean success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.txtEditField.getText());
+				boolean success = false;
+				if (MainView.this.isFileSaved) {
+					String fileExtension = Files.getFileExtension(MainView.this.fileName);
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.fileName, fileExtension, MainView.this.txtEditField.getText());
+				} else {
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.txtEditField.getText());
+				}
+				
+				if (success) {
+					System.out.println("File saved!");
+				} else {
+					System.out.println("Something went wrong.");
+				}
 			}
 		});
 		
