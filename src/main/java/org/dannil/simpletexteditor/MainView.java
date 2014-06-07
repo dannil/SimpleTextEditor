@@ -120,8 +120,28 @@ public final class MainView {
 		mntmSave.setAccelerator(SWT.MOD1 + 'S');
 		Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
 		mntmSave.setImage(imgSave);
+		mntmSave.addListener(SWT.Selection, new Listener () {
+			@Override
+			public void handleEvent(Event event) {
+				
+			}
+		});
 		
-		// Separator between Save and Exit
+		// MenuItem SaveAs
+		MenuItem mntmSaveAs = new MenuItem(mnFile, SWT.PUSH);
+		mntmSaveAs.setText(this.languageBundle.getString("save.as") + "\tCtrl+Alt+S");
+		mntmSaveAs.setAccelerator(SWT.MOD1 + SWT.MOD3 + 'S');
+		//Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/saveas.png"));
+		//mntmSaveAs.setImage(imgSave);
+		mntmSaveAs.addListener(SWT.Selection, new Listener () {
+			@Override
+			public void handleEvent(Event event) {
+				System.out.println("Save as selected");
+				boolean success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.txtEditField.getText());
+			}
+		});
+		
+		// Separator between Save As and Exit
 	    new MenuItem(mnFile, SWT.SEPARATOR);
 		
 	    // MenuItem Exit

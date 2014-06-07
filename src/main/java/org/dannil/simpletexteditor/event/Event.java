@@ -1,8 +1,10 @@
 package org.dannil.simpletexteditor.event;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -51,6 +53,23 @@ public class Event {
         return "";
         //System.out.println("File non-existant.");
 		//return "";
+	}
+	
+	public boolean saveFileAs(Shell shell, String content) throws IOException {
+        FileDialog fd = new FileDialog(shell, SWT.SAVE);
+        fd.setText(this.languageBundle.getString("save.file.as"));
+        fd.setFilterPath("C:/Users/Daniel/Desktop");
+        fd.setFilterNames(this.FILTER_NAMES);
+        fd.setFilterExtensions(this.FILTER_EXT);
+		String path = fd.open();
+		if (path != null) {
+			File file = new File(path);
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			output.write(content);
+			output.close();
+		}
+		return false;
+		
 	}
 	
 }

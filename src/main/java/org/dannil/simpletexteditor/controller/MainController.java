@@ -18,6 +18,17 @@ public final class MainController {
 			return this.event.openFile(shell);
 		}
 		catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public boolean saveFileAs(Shell shell, String content) {
+		try {
+			return this.event.saveFileAs(shell, content);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
