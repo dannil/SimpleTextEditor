@@ -24,7 +24,6 @@ public class Event {
 		this.languageBundle = LanguageUtility.getDefault();
 	}
 	
-	@SuppressWarnings("resource")
 	public String[] openFile(Shell shell) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
         fd.setText(this.languageBundle.getString("open.file"));
@@ -60,7 +59,6 @@ public class Event {
 		//return "";
 	}
 	
-	@SuppressWarnings("resource")
 	public boolean saveFileAs(Shell shell, String content) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.SAVE);
         fd.setText(this.languageBundle.getString("save.file.as"));
@@ -77,7 +75,6 @@ public class Event {
 		return false;
 	}
 	
-	@SuppressWarnings("resource")
 	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.SAVE);
         fd.setText(this.languageBundle.getString("save.file.as"));
