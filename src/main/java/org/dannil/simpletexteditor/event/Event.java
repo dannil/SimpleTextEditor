@@ -54,7 +54,7 @@ public class Event {
         	
         	return returnValues;
         }
-        return new String[] {"", ""};
+        return null;
         //System.out.println("File non-existant.");
 		//return "";
 	}

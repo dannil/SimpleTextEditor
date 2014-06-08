@@ -116,9 +116,11 @@ public final class MainView {
 				MainView.this.isFileSaved = true;
 				
 				String[] values = MainView.this.applicationController.openFile(MainView.this.shell);
-				MainView.this.fileName = values[0];
-				MainView.this.txtEditField.setText(values[1]);
-				System.out.print(values[1]);
+				if (values != null) {
+					MainView.this.fileName = values[0];
+					MainView.this.txtEditField.setText(values[1]);
+					System.out.print(values[1]);
+				}
 			}
 		});
 		
