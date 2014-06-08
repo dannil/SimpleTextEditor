@@ -3,9 +3,11 @@ package org.dannil.simpletexteditor.event;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ResourceBundle;
 
 import org.dannil.simpletexteditor.utility.LanguageUtility;
@@ -33,7 +35,7 @@ public class Event {
         String path = fd.open();
         if (path != null) {
         	File file = new File(path);
-        	BufferedReader br = new BufferedReader(new FileReader(file));
+        	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file.toString()), "utf-8"));
          
         	String content = "";
         	String line = "";
