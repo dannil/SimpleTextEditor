@@ -29,7 +29,7 @@
     </target>
 
     <target name="resolve">
-    	<property name="ivy.default.ivy.user.dir" value="${absolute.path}\lib"/>
+    	<property name="ivy.default.ivy.user.dir" value="${absolute.path}\${lib.dir}"/>
     	<ivy:retrieve type="jar" />
     </target>
 	
