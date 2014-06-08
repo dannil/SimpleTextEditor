@@ -5,11 +5,11 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="images/|languages/" including="**/*.java" kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" output="bin" path="src/test/java">
 		<attributes>
-		<attribute name="optional" value="true"/>
-	</attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="lib/cache/com.google.guava/guava/bundles/guava-17.0.jar"/>
