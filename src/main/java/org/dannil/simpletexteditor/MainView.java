@@ -48,7 +48,6 @@ public final class MainView {
 	 * Constructor
 	 */
 	public MainView() {
-		//this.languageBundle = LanguageUtility.getDefault();
 		this.languageBundle = LanguageUtility.getDefault();
 		this.applicationController = new MainController();
 		this.isFileSaved = false;
