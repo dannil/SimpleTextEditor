@@ -15,6 +15,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import com.google.common.io.CharStreams;
+
 public class Event {
 	
 	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
@@ -35,20 +37,9 @@ public class Event {
         String path = fd.open();
         if (path != null) {
         	File file = new File(path);
-        	BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file.toString()), "utf-8"));
-         
-        	String content = "";
-        	String line = "";
-        	int i = 0;
-        	while ((line = br.readLine()) != null) {
-        		if (i > 0) {
-        			content += System.getProperty("line.separator");
-        		}
-        		i++;
-        		content += line;
-        	}
-        	
-        	br.close();
+
+            FileInputStream fis = new FileInputStream(path);
+            String content = CharStreams.toString(new InputStreamReader(fis, "UTF-8"));
         	
         	String[] returnValues = new String[2];
         	returnValues[0] = path;
