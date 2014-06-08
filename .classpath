@@ -12,7 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="lib/cache/com.google.guava/guava/bundles/guava-17.0.jar"/>
+	<classpathentry kind="lib" path="lib/cache/com.google.guava/guava/bundles/guava-17.0.jar" sourcepath="C:/Users/Daniel/.m2/repository/com/google/guava/guava/17.0/guava-17.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/swt/swt-4.3_win32_x64.jar"/>
 	<classpathentry kind="lib" path="lib/jar-in-jar-loader.jar"/>
 	<classpathentry kind="output" path="bin"/>
