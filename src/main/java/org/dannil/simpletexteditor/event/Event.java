@@ -15,7 +15,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
+import com.google.common.io.Files;
 
 public class Event {
 	
@@ -89,9 +91,7 @@ public class Event {
 		String path = fd.open();
 		if (path != null) {
 			File file = new File(path);
-			BufferedWriter output = new BufferedWriter(new FileWriter(file));
-			output.write(content);
-			output.close();
+			Files.write(content, file, Charsets.UTF_8);
 			
 			return true;
 		}
