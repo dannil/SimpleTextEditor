@@ -1,5 +1,7 @@
 package org.dannil.simpletexteditor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.dannil.simpletexteditor.controller.MainController;
@@ -13,6 +15,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
 
@@ -27,8 +30,11 @@ public final class MainView {
 	protected Shell shell;
 	protected StyledText txtEditField;
 	
-	protected String fileName;
-	protected boolean isFileSaved;
+	protected List<String> contentList;
+	protected List<Boolean> isFileSavedList;
+	protected List<String> fileNameList;
+	
+	protected int tabIndex;
 
 	/**
 	 * Launch the application.
@@ -50,7 +56,15 @@ public final class MainView {
 	public MainView() {
 		this.languageBundle = LanguageUtility.getDefault();
 		this.applicationController = new MainController();
-		this.isFileSaved = false;
+		this.contentList = new ArrayList<String>();
+		this.fileNameList = new ArrayList<String>();
+		this.isFileSavedList = new ArrayList<Boolean>();
+		
+		this.tabIndex = 0;
+		
+		this.contentList.add(tabIndex, "");
+		this.fileNameList.add(tabIndex, "");
+		this.isFileSavedList.add(tabIndex, false);
 	}
 	
 	
@@ -100,6 +114,24 @@ public final class MainView {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("New selected");
+				System.out.println(isFileSavedList.get(tabIndex));
+				System.out.println(fileNameList.get(tabIndex));
+				if (!isFileSavedList.get(tabIndex) && !fileNameList.get(tabIndex).equals("")) {
+			        System.out.println("Entering if-statement");
+					MessageBox messageBox = new MessageBox(shell, SWT.YES | SWT.NO);
+			        messageBox.setMessage("It seems you have unsaved changes. Do you wish to discard them?");
+			        messageBox.setText(languageBundle.getString("new.file"));
+			        int response = messageBox.open();
+			        
+			        boolean success;
+			        if (response == SWT.NO) {
+			        	success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.txtEditField.getText());
+			        } else if (response == SWT.YES) {
+			        	contentList.set(tabIndex, "");
+			        }
+				} else {
+					txtEditField.setText(contentList.get(tabIndex));
+				}
 			}
 		});
 		
@@ -113,13 +145,15 @@ public final class MainView {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Open selected");
-				MainView.this.isFileSaved = true;
 				
 				String[] values = MainView.this.applicationController.openFile(MainView.this.shell);
 				if (values != null) {
-					MainView.this.fileName = values[0];
-					MainView.this.txtEditField.setText(values[1]);
-					System.out.print(values[1]);
+					MainView.this.contentList.set(tabIndex, values[1]);
+					MainView.this.fileNameList.set(tabIndex, values[0]);
+					MainView.this.isFileSavedList.set(tabIndex, true);
+					
+					MainView.this.txtEditField.setText(contentList.get(tabIndex));
+					System.out.print(contentList.get(tabIndex));
 				}
 			}
 		});
@@ -133,7 +167,7 @@ public final class MainView {
 		mntmSave.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
-				if (MainView.this.isFileSaved) {
+				if (MainView.this.isFileSavedList.get(tabIndex)) {
 					// Do not prompt user as file is already on the file system
 				} else {
 					// Prompt user to save a new file
@@ -150,14 +184,15 @@ public final class MainView {
 		mntmSaveAs.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
-				System.out.println(MainView.this.isFileSaved);
+				System.out.println(MainView.this.isFileSavedList.get(tabIndex));
 				System.out.println("Save as selected");
 				boolean success = false;
-				if (MainView.this.isFileSaved) {
-					String fileExtension = Files.getFileExtension(MainView.this.fileName);
-					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.fileName, fileExtension, MainView.this.txtEditField.getText());
+				if (MainView.this.isFileSavedList.get(tabIndex)) {
+					System.out.println("Entering if-statement");
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.contentList.get(tabIndex));
 				} else {
-					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.txtEditField.getText());
+					System.out.println("Entering else-statement");
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.contentList.get(tabIndex));
 				}
 				
 				if (success) {
