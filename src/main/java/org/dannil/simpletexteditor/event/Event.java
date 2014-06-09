@@ -92,6 +92,8 @@ public class Event {
 			BufferedWriter output = new BufferedWriter(new FileWriter(file));
 			output.write(content);
 			output.close();
+			
+			return true;
 		}
 		return false;
 	}
