@@ -20,6 +20,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.google.common.io.Files;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public final class MainView {
 
@@ -167,6 +169,7 @@ public final class MainView {
 		mntmSave.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
+				System.out.println("Save selected");
 				if (MainView.this.isFileSavedList.get(tabIndex)) {
 					// Do not prompt user as file is already on the file system
 				} else {
@@ -184,8 +187,8 @@ public final class MainView {
 		mntmSaveAs.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
-				System.out.println(MainView.this.isFileSavedList.get(tabIndex));
 				System.out.println("Save as selected");
+				System.out.println(MainView.this.isFileSavedList.get(tabIndex));
 				boolean success = false;
 				if (MainView.this.isFileSavedList.get(tabIndex)) {
 					System.out.println("Entering if-statement");
@@ -215,6 +218,7 @@ public final class MainView {
 		mntmExit.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
+				System.out.println("Exit selected");
 				MainView.this.shell.getDisplay().dispose();
 			}
 		});
@@ -230,6 +234,12 @@ public final class MainView {
 		// MenuItem Undo
 		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
 		mntmUndo.setText(this.languageBundle.getString("undo") + "\tCtrl+Z");
+		mntmUndo.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				System.out.println("Undo selected");
+			}
+		});
 		
 		// Text EditField
 		this.txtEditField = new StyledText(this.shell, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL);
