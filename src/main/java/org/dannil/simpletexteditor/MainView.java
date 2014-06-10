@@ -119,7 +119,7 @@ public final class MainView {
 				if (!isFileSavedList.get(tabIndex) && !fileNameList.get(tabIndex).equals("")) {
 			        System.out.println("Entering if-statement");
 					MessageBox messageBox = new MessageBox(shell, SWT.YES | SWT.NO);
-			        messageBox.setMessage("It seems you have unsaved changes. Do you wish to discard them?");
+			        messageBox.setMessage(languageBundle.getString("unsaved.changes"));
 			        messageBox.setText(languageBundle.getString("new.file"));
 			        int response = messageBox.open();
 			        
