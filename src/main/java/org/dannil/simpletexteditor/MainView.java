@@ -29,7 +29,7 @@ public final class MainView {
 	
 	protected final MainController applicationController;
 	
-	protected Shell shell;
+	protected Shell shlMain;
 	protected StyledText txtEditField;
 	
 	protected List<String> contentList;
@@ -76,9 +76,9 @@ public final class MainView {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		this.shell.open();
-		this.shell.layout();
-		while (!this.shell.isDisposed()) {
+		this.shlMain.open();
+		this.shlMain.layout();
+		while (!this.shlMain.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -89,17 +89,17 @@ public final class MainView {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		this.shell = new Shell();
-		this.shell.setSize(960, 540);
-		this.shell.setText("SimpleTextEditor");
-		this.shell.setLayout(new FillLayout(SWT.HORIZONTAL));
+		this.shlMain = new Shell();
+		this.shlMain.setSize(960, 540);
+		this.shlMain.setText("SimpleTextEditor");
+		this.shlMain.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		// Top Menu
-		Menu menu = new Menu(this.shell, SWT.BAR);
-		this.shell.setMenuBar(menu);
+		Menu mnuMain = new Menu(this.shlMain, SWT.BAR);
+		this.shlMain.setMenuBar(mnuMain);
 		
 		// Cascading MenuItem File
-		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
+		MenuItem mntmFile = new MenuItem(mnuMain, SWT.CASCADE);
 		mntmFile.setText(this.languageBundle.getString("file"));
 		
 		// Menu File
@@ -110,7 +110,7 @@ public final class MainView {
 		MenuItem mntmNew = new MenuItem(mnFile, SWT.PUSH);
 		mntmNew.setText(this.languageBundle.getString("new") + "\tCtrl+N");
 		mntmNew.setAccelerator(SWT.MOD1 + 'N');
-		Image imgNew = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
+		Image imgNew = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
 		mntmNew.setImage(imgNew);
 		mntmNew.addListener(SWT.Selection, new Listener() {
 			@Override
@@ -120,14 +120,14 @@ public final class MainView {
 				System.out.println(fileNameList.get(tabIndex));
 				if (!isFileSavedList.get(tabIndex) && !fileNameList.get(tabIndex).equals("")) {
 			        System.out.println("Entering if-statement");
-					MessageBox messageBox = new MessageBox(shell, SWT.YES | SWT.NO);
+					MessageBox messageBox = new MessageBox(shlMain, SWT.YES | SWT.NO);
 			        messageBox.setMessage(languageBundle.getString("unsaved.changes"));
 			        messageBox.setText(languageBundle.getString("new.file"));
 			        int response = messageBox.open();
 			        
 			        boolean success;
 			        if (response == SWT.NO) {
-			        	success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.txtEditField.getText());
+			        	success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.txtEditField.getText());
 			        } else if (response == SWT.YES) {
 			        	contentList.set(tabIndex, "");
 			        }
@@ -141,14 +141,14 @@ public final class MainView {
 		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
 		mntmOpen.setText(this.languageBundle.getString("open") + "\tCtrl+O");
 		mntmOpen.setAccelerator(SWT.MOD1 + 'O');
-		Image imgOpen = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
+		Image imgOpen = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
 		mntmOpen.setImage(imgOpen);
 		mntmOpen.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Open selected");
 				
-				String[] values = MainView.this.applicationController.openFile(MainView.this.shell);
+				String[] values = MainView.this.applicationController.openFile(MainView.this.shlMain);
 				if (values != null) {
 					MainView.this.contentList.set(tabIndex, values[1]);
 					MainView.this.fileNameList.set(tabIndex, values[0]);
@@ -164,7 +164,7 @@ public final class MainView {
 		MenuItem mntmSave = new MenuItem(mnFile, SWT.PUSH);
 		mntmSave.setText(this.languageBundle.getString("save") + "\tCtrl+S");
 		mntmSave.setAccelerator(SWT.MOD1 + 'S');
-		Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
+		Image imgSave = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
 		mntmSave.setImage(imgSave);
 		mntmSave.addListener(SWT.Selection, new Listener () {
 			@Override
@@ -192,10 +192,10 @@ public final class MainView {
 				boolean success = false;
 				if (MainView.this.isFileSavedList.get(tabIndex)) {
 					System.out.println("Entering if-statement");
-					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.contentList.get(tabIndex));
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.contentList.get(tabIndex));
 				} else {
 					System.out.println("Entering else-statement");
-					success = MainView.this.applicationController.saveFileAs(MainView.this.shell, MainView.this.contentList.get(tabIndex));
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.contentList.get(tabIndex));
 				}
 				
 				if (success) {
@@ -213,18 +213,18 @@ public final class MainView {
 		MenuItem mntmExit = new MenuItem(mnFile, SWT.PUSH);
 		mntmExit.setText(this.languageBundle.getString("exit") + "\tAlt+F4");
 		//mntmExit.setAccelerator(SWT.MOD3 + 'F4');
-		Image imgExit = new Image(this.shell.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
+		Image imgExit = new Image(this.shlMain.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mntmExit.setImage(imgExit);
 		mntmExit.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Exit selected");
-				MainView.this.shell.getDisplay().dispose();
+				MainView.this.shlMain.getDisplay().dispose();
 			}
 		});
 		
 		// Cascading MenuItem Edit
-		MenuItem mntmEdit = new MenuItem(menu, SWT.CASCADE);
+		MenuItem mntmEdit = new MenuItem(mnuMain, SWT.CASCADE);
 		mntmEdit.setText(this.languageBundle.getString("edit"));
 		
 		// Menu Edit
@@ -242,7 +242,7 @@ public final class MainView {
 		});
 		
 		// Text EditField
-		this.txtEditField = new StyledText(this.shell, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL);
+		this.txtEditField = new StyledText(this.shlMain, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL);
 		this.txtEditField.setTopMargin(4);
 		this.txtEditField.setBottomMargin(4);
 		this.txtEditField.setRightMargin(4);
