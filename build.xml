@@ -39,6 +39,7 @@
     <!-- Compile the project -->
     <target name="compile" depends="resolve">
         <mkdir dir="${classes.dir}" />
+    	<echo message="Ant using Java version: ${ant.java.version}" />
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false" />
     </target>
 
