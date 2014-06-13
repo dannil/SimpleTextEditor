@@ -107,12 +107,12 @@ public final class MainView {
 		mntmFile.setMenu(mnFile);
 
 		// MenuItem New
-		MenuItem mntmNew = new MenuItem(mnFile, SWT.PUSH);
-		mntmNew.setText(this.languageBundle.getString("new") + "\tCtrl+N");
-		mntmNew.setAccelerator(SWT.MOD1 + 'N');
+		MenuItem mndtmNew = new MenuItem(mnFile, SWT.PUSH);
+		mndtmNew.setText(this.languageBundle.getString("new") + "\tCtrl+N");
+		mndtmNew.setAccelerator(SWT.MOD1 + 'N');
 		Image imgNew = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
-		mntmNew.setImage(imgNew);
-		mntmNew.addListener(SWT.Selection, new Listener() {
+		mndtmNew.setImage(imgNew);
+		mndtmNew.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("New selected");
@@ -138,12 +138,12 @@ public final class MainView {
 		});
 		
 		// MenuItem Open
-		MenuItem mntmOpen = new MenuItem(mnFile, SWT.PUSH);
-		mntmOpen.setText(this.languageBundle.getString("open") + "\tCtrl+O");
-		mntmOpen.setAccelerator(SWT.MOD1 + 'O');
+		MenuItem mndtmOpen = new MenuItem(mnFile, SWT.PUSH);
+		mndtmOpen.setText(this.languageBundle.getString("open") + "\tCtrl+O");
+		mndtmOpen.setAccelerator(SWT.MOD1 + 'O');
 		Image imgOpen = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
-		mntmOpen.setImage(imgOpen);
-		mntmOpen.addListener(SWT.Selection, new Listener() {
+		mndtmOpen.setImage(imgOpen);
+		mndtmOpen.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Open selected");
@@ -161,12 +161,12 @@ public final class MainView {
 		});
 		
 		// MenuItem Save
-		MenuItem mntmSave = new MenuItem(mnFile, SWT.PUSH);
-		mntmSave.setText(this.languageBundle.getString("save") + "\tCtrl+S");
-		mntmSave.setAccelerator(SWT.MOD1 + 'S');
+		MenuItem mndtmSave = new MenuItem(mnFile, SWT.PUSH);
+		mndtmSave.setText(this.languageBundle.getString("save") + "\tCtrl+S");
+		mndtmSave.setAccelerator(SWT.MOD1 + 'S');
 		Image imgSave = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
-		mntmSave.setImage(imgSave);
-		mntmSave.addListener(SWT.Selection, new Listener () {
+		mndtmSave.setImage(imgSave);
+		mndtmSave.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Save selected");
@@ -179,12 +179,12 @@ public final class MainView {
 		});
 		
 		// MenuItem SaveAs
-		MenuItem mntmSaveAs = new MenuItem(mnFile, SWT.PUSH);
-		mntmSaveAs.setText(this.languageBundle.getString("save.as") + "\tCtrl+Alt+S");
-		mntmSaveAs.setAccelerator(SWT.MOD1 + SWT.MOD3 + 'S');
+		MenuItem mndtmSaveAs = new MenuItem(mnFile, SWT.PUSH);
+		mndtmSaveAs.setText(this.languageBundle.getString("save.as") + "\tCtrl+Alt+S");
+		mndtmSaveAs.setAccelerator(SWT.MOD1 + SWT.MOD3 + 'S');
 		//Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/saveas.png"));
 		//mntmSaveAs.setImage(imgSave);
-		mntmSaveAs.addListener(SWT.Selection, new Listener () {
+		mndtmSaveAs.addListener(SWT.Selection, new Listener () {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Save as selected");
@@ -210,12 +210,12 @@ public final class MainView {
 	    new MenuItem(mnFile, SWT.SEPARATOR);
 		
 	    // MenuItem Exit
-		MenuItem mntmExit = new MenuItem(mnFile, SWT.PUSH);
-		mntmExit.setText(this.languageBundle.getString("exit") + "\tAlt+F4");
+		MenuItem mndtmExit = new MenuItem(mnFile, SWT.PUSH);
+		mndtmExit.setText(this.languageBundle.getString("exit") + "\tAlt+F4");
 		//mntmExit.setAccelerator(SWT.MOD3 + 'F4');
 		Image imgExit = new Image(this.shlMain.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
-		mntmExit.setImage(imgExit);
-		mntmExit.addListener(SWT.Selection, new Listener() {
+		mndtmExit.setImage(imgExit);
+		mndtmExit.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Exit selected");
@@ -232,12 +232,32 @@ public final class MainView {
 		mntmEdit.setMenu(mnEdit);
 		
 		// MenuItem Undo
-		MenuItem mntmUndo = new MenuItem(mnEdit, SWT.PUSH);
-		mntmUndo.setText(this.languageBundle.getString("undo") + "\tCtrl+Z");
-		mntmUndo.addListener(SWT.Selection, new Listener() {
+		MenuItem mndtmUndo = new MenuItem(mnEdit, SWT.PUSH);
+		mndtmUndo.setText(this.languageBundle.getString("undo") + "\tCtrl+Z");
+		mndtmUndo.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("Undo selected");
+			}
+		});
+		
+		// Cascading MenuItem Settings
+		MenuItem mntmSettings = new MenuItem(mnuMain, SWT.CASCADE);
+		mntmSettings.setText(languageBundle.getString("settings"));
+		
+		// Menu Settings
+		Menu mnSettings = new Menu(mntmSettings);
+		mntmSettings.setMenu(mnSettings);
+		
+		// MenuItem Settings
+		MenuItem mndtmSettings = new MenuItem(mnSettings, SWT.NONE);
+		mndtmSettings.setText(languageBundle.getString("settings"));
+		mndtmSettings.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				System.out.println("Settings selected");
+				SettingsView settingsView = new SettingsView();
+				settingsView.open();
 			}
 		});
 		
