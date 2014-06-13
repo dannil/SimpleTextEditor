@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 

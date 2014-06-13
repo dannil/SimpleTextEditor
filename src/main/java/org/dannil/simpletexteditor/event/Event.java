@@ -1,10 +1,8 @@
 package org.dannil.simpletexteditor.event;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,9 +36,7 @@ public class Event {
         fd.setFilterExtensions(this.FILTER_EXT);
         String path = fd.open();
         if (path != null) {
-        	File file = new File(path);
-
-            FileInputStream fis = new FileInputStream(path);
+        	FileInputStream fis = new FileInputStream(path);
             String content = CharStreams.toString(new InputStreamReader(fis, "UTF-8"));
         	
         	String[] returnValues = new String[2];

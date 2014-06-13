@@ -20,8 +20,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import com.google.common.io.Files;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
 public final class MainView {
 
@@ -125,9 +123,8 @@ public final class MainView {
 			        messageBox.setText(languageBundle.getString("new.file"));
 			        int response = messageBox.open();
 			        
-			        boolean success;
 			        if (response == SWT.NO) {
-			        	success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.txtEditField.getText());
+			        	MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.fileNameList.get(tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(tabIndex)), MainView.this.txtEditField.getText());
 			        } else if (response == SWT.YES) {
 			        	contentList.set(tabIndex, "");
 			        }
