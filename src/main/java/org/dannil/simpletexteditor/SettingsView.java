@@ -55,7 +55,7 @@ public final class SettingsView {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shlSettings = new Shell(SWT.CLOSE | SWT.TITLE);
+		shlSettings = new Shell(SWT.CLOSE | SWT.TITLE | SWT.APPLICATION_MODAL);
 		shlSettings.setSize(540, 440);
 		shlSettings.setText(languageBundle.getString("settings"));
 		shlSettings.setLayout(new FillLayout(SWT.HORIZONTAL));
