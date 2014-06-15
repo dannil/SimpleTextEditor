@@ -240,7 +240,7 @@ public final class MainView {
 		
 		// Cascading MenuItem Settings
 		MenuItem mntmSettings = new MenuItem(mnuMain, SWT.CASCADE);
-		mntmSettings.setText(languageBundle.getString("settings"));
+		mntmSettings.setText(this.languageBundle.getString("settings"));
 		
 		// Menu Settings
 		Menu mnSettings = new Menu(mntmSettings);
@@ -248,7 +248,7 @@ public final class MainView {
 		
 		// MenuItem Settings
 		MenuItem mndtmSettings = new MenuItem(mnSettings, SWT.NONE);
-		mndtmSettings.setText(languageBundle.getString("settings"));
+		mndtmSettings.setText(this.languageBundle.getString("settings"));
 		mndtmSettings.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
