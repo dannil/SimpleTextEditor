@@ -209,7 +209,7 @@ public final class MainView {
 	    // MenuItem Exit
 		MenuItem mndtmExit = new MenuItem(mnFile, SWT.PUSH);
 		mndtmExit.setText(this.languageBundle.getString("exit") + "\tAlt+F4");
-		//mntmExit.setAccelerator(SWT.MOD3 + 'F4');
+		mndtmExit.setAccelerator(SWT.MOD3 + SWT.F4);
 		Image imgExit = new Image(this.shlMain.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mndtmExit.setImage(imgExit);
 		mndtmExit.addListener(SWT.Selection, new Listener() {
