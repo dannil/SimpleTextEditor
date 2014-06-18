@@ -30,7 +30,7 @@ public class Event {
 	
 	public String[] openFile(Shell shell) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.OPEN);
-        fd.setText(this.languageBundle.getString("open.file"));
+        fd.setText(this.languageBundle.getString("mainview.open.file"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
@@ -52,7 +52,7 @@ public class Event {
 	
 	public boolean saveFileAs(Shell shell, String content) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.SAVE);
-        fd.setText(this.languageBundle.getString("save.file.as"));
+        fd.setText(this.languageBundle.getString("mainview.save.file.as"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
@@ -68,7 +68,7 @@ public class Event {
 	
 	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) throws IOException {
         FileDialog fd = new FileDialog(shell, SWT.SAVE);
-        fd.setText(this.languageBundle.getString("save.file.as"));
+        fd.setText(this.languageBundle.getString("mainview.save.file.as"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
