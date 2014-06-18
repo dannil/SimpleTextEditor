@@ -98,7 +98,7 @@ public final class MainView {
 		
 		// Cascading MenuItem File
 		MenuItem mntmFile = new MenuItem(mnuMain, SWT.CASCADE);
-		mntmFile.setText(this.languageBundle.getString("file"));
+		mntmFile.setText(this.languageBundle.getString("mainview.file"));
 		
 		// Menu File
 		Menu mnFile = new Menu(mntmFile);
@@ -106,7 +106,7 @@ public final class MainView {
 
 		// MenuItem New
 		MenuItem mndtmNew = new MenuItem(mnFile, SWT.PUSH);
-		mndtmNew.setText(this.languageBundle.getString("new") + "\tCtrl+N");
+		mndtmNew.setText(this.languageBundle.getString("mainview.new") + "\tCtrl+N");
 		mndtmNew.setAccelerator(SWT.MOD1 + 'N');
 		Image imgNew = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/new.png"));
 		mndtmNew.setImage(imgNew);
@@ -119,7 +119,7 @@ public final class MainView {
 				if (!isFileSavedList.get(tabIndex) && !fileNameList.get(tabIndex).equals("")) {
 			        System.out.println("Entering if-statement");
 					MessageBox messageBox = new MessageBox(shlMain, SWT.YES | SWT.NO);
-			        messageBox.setMessage(languageBundle.getString("unsaved.changes"));
+			        messageBox.setMessage(languageBundle.getString("mainview.unsaved.changes"));
 			        messageBox.setText(languageBundle.getString("new.file"));
 			        int response = messageBox.open();
 			        
@@ -136,7 +136,7 @@ public final class MainView {
 		
 		// MenuItem Open
 		MenuItem mndtmOpen = new MenuItem(mnFile, SWT.PUSH);
-		mndtmOpen.setText(this.languageBundle.getString("open") + "\tCtrl+O");
+		mndtmOpen.setText(this.languageBundle.getString("mainview.open") + "\tCtrl+O");
 		mndtmOpen.setAccelerator(SWT.MOD1 + 'O');
 		Image imgOpen = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/open.png"));
 		mndtmOpen.setImage(imgOpen);
@@ -159,7 +159,7 @@ public final class MainView {
 		
 		// MenuItem Save
 		MenuItem mndtmSave = new MenuItem(mnFile, SWT.PUSH);
-		mndtmSave.setText(this.languageBundle.getString("save") + "\tCtrl+S");
+		mndtmSave.setText(this.languageBundle.getString("mainview.save") + "\tCtrl+S");
 		mndtmSave.setAccelerator(SWT.MOD1 + 'S');
 		Image imgSave = new Image(this.shlMain.getDisplay(), getClass().getResourceAsStream("/images/save.png"));
 		mndtmSave.setImage(imgSave);
@@ -177,7 +177,7 @@ public final class MainView {
 		
 		// MenuItem SaveAs
 		MenuItem mndtmSaveAs = new MenuItem(mnFile, SWT.PUSH);
-		mndtmSaveAs.setText(this.languageBundle.getString("save.as") + "\tCtrl+Alt+S");
+		mndtmSaveAs.setText(this.languageBundle.getString("mainview.save.as") + "\tCtrl+Alt+S");
 		mndtmSaveAs.setAccelerator(SWT.MOD1 + SWT.MOD3 + 'S');
 		//Image imgSave = new Image(this.shell.getDisplay(), getClass().getResourceAsStream("/images/saveas.png"));
 		//mntmSaveAs.setImage(imgSave);
@@ -208,7 +208,7 @@ public final class MainView {
 		
 	    // MenuItem Exit
 		MenuItem mndtmExit = new MenuItem(mnFile, SWT.PUSH);
-		mndtmExit.setText(this.languageBundle.getString("exit") + "\tAlt+F4");
+		mndtmExit.setText(this.languageBundle.getString("mainview.exit") + "\tAlt+F4");
 		mndtmExit.setAccelerator(SWT.MOD3 + SWT.F4);
 		Image imgExit = new Image(this.shlMain.getDisplay(), this.getClass().getResourceAsStream("/images/exit.png"));
 		mndtmExit.setImage(imgExit);
@@ -222,7 +222,7 @@ public final class MainView {
 		
 		// Cascading MenuItem Edit
 		MenuItem mntmEdit = new MenuItem(mnuMain, SWT.CASCADE);
-		mntmEdit.setText(this.languageBundle.getString("edit"));
+		mntmEdit.setText(this.languageBundle.getString("mainview.edit"));
 		
 		// Menu Edit
 		Menu mnEdit = new Menu(mntmEdit);
@@ -230,7 +230,7 @@ public final class MainView {
 		
 		// MenuItem Undo
 		MenuItem mndtmUndo = new MenuItem(mnEdit, SWT.PUSH);
-		mndtmUndo.setText(this.languageBundle.getString("undo") + "\tCtrl+Z");
+		mndtmUndo.setText(this.languageBundle.getString("mainview.undo") + "\tCtrl+Z");
 		mndtmUndo.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -240,7 +240,7 @@ public final class MainView {
 		
 		// Cascading MenuItem Settings
 		MenuItem mntmSettings = new MenuItem(mnuMain, SWT.CASCADE);
-		mntmSettings.setText(this.languageBundle.getString("settings"));
+		mntmSettings.setText(this.languageBundle.getString("mainview.settings"));
 		
 		// Menu Settings
 		Menu mnSettings = new Menu(mntmSettings);
@@ -248,7 +248,7 @@ public final class MainView {
 		
 		// MenuItem Settings
 		MenuItem mndtmSettings = new MenuItem(mnSettings, SWT.NONE);
-		mndtmSettings.setText(this.languageBundle.getString("settings"));
+		mndtmSettings.setText(this.languageBundle.getString("mainview.settings"));
 		mndtmSettings.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
