@@ -62,7 +62,7 @@ public final class SettingsView {
 		shlSettings.setText(languageBundle.getString("settingsview.settings"));
 		shlSettings.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		TabFolder tbfSettings = new TabFolder(this.shlSettings, SWT.BORDER);
+		TabFolder tbfSettings = new TabFolder(this.shlSettings, SWT.FILL);
 		
 		TabItem tbtmGeneral = new TabItem(tbfSettings, SWT.NONE);
 		tbtmGeneral.setText(languageBundle.getString("settingsview.general"));
