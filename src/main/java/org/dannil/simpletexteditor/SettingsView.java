@@ -34,7 +34,7 @@ public final class SettingsView {
 	 * Constructor
 	 */
 	public SettingsView() {
-		languageBundle = LanguageUtility.getDefault();
+		this.languageBundle = LanguageUtility.getDefault();
 	}
 	
 	/**
@@ -44,9 +44,9 @@ public final class SettingsView {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shlSettings.open();
-		shlSettings.layout();
-		while (!shlSettings.isDisposed()) {
+		this.shlSettings.open();
+		this.shlSettings.layout();
+		while (!this.shlSettings.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -57,17 +57,17 @@ public final class SettingsView {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shlSettings = new Shell(SWT.CLOSE | SWT.TITLE | SWT.APPLICATION_MODAL);
-		shlSettings.setSize(540, 440);
-		shlSettings.setText(languageBundle.getString("settingsview.settings"));
-		shlSettings.setLayout(new FillLayout(SWT.HORIZONTAL));
+		this.shlSettings = new Shell(SWT.CLOSE | SWT.TITLE | SWT.APPLICATION_MODAL);
+		this.shlSettings.setSize(540, 440);
+		this.shlSettings.setText(this.languageBundle.getString("settingsview.settings"));
+		this.shlSettings.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		TabFolder tbfSettings = new TabFolder(this.shlSettings, SWT.FILL);
 		
 		TabItem tbtmGeneral = new TabItem(tbfSettings, SWT.NONE);
-		tbtmGeneral.setText(languageBundle.getString("settingsview.general"));
+		tbtmGeneral.setText(this.languageBundle.getString("settingsview.general"));
 		
 		TabItem tbtmFonts = new TabItem(tbfSettings, SWT.NONE);
-		tbtmFonts.setText(languageBundle.getString("settingsview.fonts"));
+		tbtmFonts.setText(this.languageBundle.getString("settingsview.fonts"));
 	}
 }
