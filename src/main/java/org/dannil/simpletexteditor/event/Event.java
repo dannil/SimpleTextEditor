@@ -17,29 +17,29 @@ import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 
-public class Event {
+final public class Event {
 	
 	private final String[] FILTER_NAMES = { "Text (*.txt)", "HTML (*.html, *.xhtml)" };
 	private final String[] FILTER_EXT = { "*.txt", "*.html;*.xhtml"/*"*.doc", ".rtf", "*.*"*/ };
 	
-	ResourceBundle languageBundle;
+	private final ResourceBundle languageBundle;
 	
 	public Event() {
 		this.languageBundle = LanguageUtility.getDefault();
 	}
 	
 	public String[] openFile(Shell shell) throws IOException {
-        FileDialog fd = new FileDialog(shell, SWT.OPEN);
+        final FileDialog fd = new FileDialog(shell, SWT.OPEN);
         fd.setText(this.languageBundle.getString("mainview.open.file"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
-        String path = fd.open();
+        final String path = fd.open();
         if (path != null) {
-        	FileInputStream fis = new FileInputStream(path);
-            String content = CharStreams.toString(new InputStreamReader(fis, "UTF-8"));
+        	final FileInputStream fis = new FileInputStream(path);
+        	final String content = CharStreams.toString(new InputStreamReader(fis, "UTF-8"));
         	
-        	String[] returnValues = new String[2];
+        	final String[] returnValues = new String[2];
         	returnValues[0] = path;
         	returnValues[1] = content;
         	
@@ -51,23 +51,26 @@ public class Event {
 	}
 	
 	public boolean saveFileAs(Shell shell, String content) throws IOException {
-        FileDialog fd = new FileDialog(shell, SWT.SAVE);
+		final FileDialog fd = new FileDialog(shell, SWT.SAVE);
         fd.setText(this.languageBundle.getString("mainview.save.file.as"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
-		String path = fd.open();
+        final String path = fd.open();
 		if (path != null) {
-			File file = new File(path);
-			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			final File file = new File(path);
+			@SuppressWarnings("resource")
+			final BufferedWriter output = new BufferedWriter(new FileWriter(file));
 			output.write(content);
 			output.close();
+			
+			return true;
 		}
 		return false;
 	}
 	
 	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) throws IOException {
-        FileDialog fd = new FileDialog(shell, SWT.SAVE);
+		final FileDialog fd = new FileDialog(shell, SWT.SAVE);
         fd.setText(this.languageBundle.getString("mainview.save.file.as"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
@@ -84,7 +87,7 @@ public class Event {
         }
         //System.out.println(fd.getFilterIndex());
         
-		String path = fd.open();
+        final String path = fd.open();
 		if (path != null) {
 			File file = new File(path);
 			Files.write(content, file, Charsets.UTF_8);
