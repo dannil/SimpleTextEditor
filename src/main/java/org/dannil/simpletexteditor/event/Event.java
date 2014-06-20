@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ResourceBundle;
 
+import org.dannil.simpletexteditor.model.Document;
 import org.dannil.simpletexteditor.utility.LanguageUtility;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
@@ -69,19 +70,19 @@ final public class Event {
 		return false;
 	}
 	
-	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) throws IOException {
+	public boolean saveFileAs(Shell shell, Document document) throws IOException {
 		final FileDialog fd = new FileDialog(shell, SWT.SAVE);
         fd.setText(this.languageBundle.getString("mainview.save.file.as"));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
-        System.out.println(fileName);
-        fd.setFileName(fileName);
+        System.out.println(document.getPath());
+        fd.setFileName(document.getPath());
         
         for (int i = 0; i < this.FILTER_EXT.length; i++) {
         	//System.out.println("Stored ext: " + this.FILTER_EXT[i]);
         	//System.out.println("Supplied ext: " + ("*." + fileExtension));
-        	if (this.FILTER_EXT[i].contains(("*." + fileExtension).toLowerCase())) {
+        	if (this.FILTER_EXT[i].contains(("*." + document.getExtension()).toLowerCase())) {
                 fd.setFilterIndex(i);
         	}
         }
@@ -90,7 +91,7 @@ final public class Event {
         final String path = fd.open();
 		if (path != null) {
 			File file = new File(path);
-			Files.write(content, file, Charsets.UTF_8);
+			Files.write(document.getContent(), file, Charsets.UTF_8);
 			
 			return true;
 		}

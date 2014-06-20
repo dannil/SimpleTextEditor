@@ -3,6 +3,7 @@ package org.dannil.simpletexteditor.controller;
 import java.io.IOException;
 
 import org.dannil.simpletexteditor.event.Event;
+import org.dannil.simpletexteditor.model.Document;
 import org.eclipse.swt.widgets.Shell;
 
 public final class MainController {
@@ -33,9 +34,9 @@ public final class MainController {
 		}
 	}
 	
-	public boolean saveFileAs(Shell shell, String fileName, String fileExtension, String content) {
+	public boolean saveFileAs(Shell shell, Document document) {
 		try {
-			return this.event.saveFileAs(shell, fileName, fileExtension, content);
+			return this.event.saveFileAs(shell, document);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

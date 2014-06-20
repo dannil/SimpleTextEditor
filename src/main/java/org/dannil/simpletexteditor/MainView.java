@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import org.dannil.simpletexteditor.controller.MainController;
+import org.dannil.simpletexteditor.model.Document;
 import org.dannil.simpletexteditor.utility.LanguageUtility;
+import org.eclipse.swt.custom.ExtendedModifyEvent;
+import org.eclipse.swt.custom.ExtendedModifyListener;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
@@ -124,7 +127,9 @@ public final class MainView {
 			        int response = messageBox.open();
 			        
 			        if (response == SWT.NO) {
-			        	MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.fileNameList.get(MainView.this.tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(MainView.this.tabIndex)), MainView.this.txtEditField.getText());
+			        	System.out.println("Response was NO");
+			        	Document document = new Document(MainView.this.fileNameList.get(MainView.this.tabIndex), MainView.this.txtEditField.getText());
+			        	MainView.this.applicationController.saveFileAs(MainView.this.shlMain, document);
 			        } else if (response == SWT.YES) {
 			        	MainView.this.contentList.set(MainView.this.tabIndex, "");
 			        }
@@ -189,10 +194,12 @@ public final class MainView {
 			public void handleEvent(Event event) {
 				System.out.println("Save as selected");
 				System.out.println(MainView.this.isFileSavedList.get(MainView.this.tabIndex));
+				System.out.println(MainView.this.contentList.get(MainView.this.tabIndex));
 				boolean success = false;
 				if (MainView.this.isFileSavedList.get(MainView.this.tabIndex)) {
 					System.out.println("Entering if-statement");
-					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.fileNameList.get(MainView.this.tabIndex), Files.getFileExtension(MainView.this.fileNameList.get(MainView.this.tabIndex)), MainView.this.contentList.get(MainView.this.tabIndex));
+					Document document = new Document(MainView.this.fileNameList.get(MainView.this.tabIndex), MainView.this.contentList.get(MainView.this.tabIndex));
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, document);
 				} else {
 					System.out.println("Entering else-statement");
 					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.contentList.get(MainView.this.tabIndex));
@@ -269,5 +276,12 @@ public final class MainView {
 		this.txtEditField.setLeftMargin(4);
 		this.txtEditField.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		this.txtEditField.setAlwaysShowScrollBars(false);
+		
+		this.txtEditField.addExtendedModifyListener(new ExtendedModifyListener() {
+			@Override
+			public void modifyText(ExtendedModifyEvent event) {
+				MainView.this.contentList.set(MainView.this.tabIndex, MainView.this.txtEditField.getText());
+			}
+		});
 	}
 }
