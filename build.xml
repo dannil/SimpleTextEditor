@@ -4,27 +4,18 @@
 	<property name="resources.dir" value="${src.dir}/main/resources"></property>
 
 	<!-- Version numbers and other useful stuff goes here -->
+	<property name="app.name">SimpleTextEditor</property>
 	<property name="app.version">0.1</property>
 	<property name="swt.version">4.3</property>
-	<property name="app.name">SimpleTextEditor</property>
 	
     <!-- Define the necessary paths -->
-	<property name="absolute.path" value="C:\Users\Daniel\git\SimpleTextEditor" />
     <property name="build.dir" value="bin_temp" />
     <property name="lib.dir" value="lib" />
     <property name="lib.swt.dir" value="${lib.dir}/swt" />
     <property name="classes.dir" value="${build.dir}/classes" />
     <property name="jar.dir" value="${build.dir}/jar" />
-	<property name="executables.dir" value="${jar.dir}/exec" />
-	<property name="exeFile" value="${app.name}.exe" />
-	
-	<property name="ivy.dependencies.dir" value="${lib.dir}/cache" />
-	<property name="guava.dir" value="${ivy.dependencies.dir}\com.google.guava\guava\bundles" />
-	
-	<property name="launch4j.dir" location="vendor/launch4j" />
-	<taskdef name="launch4j" 
-	    classname="net.sf.launch4j.ant.Launch4jTask"
-	    classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
+	<property name="vendor.dir" value="vendor" />
+
 		
     <!-- Define the main class -->
     <property name="main-class" value="org.dannil.simpletexteditor.MainView" />
@@ -38,33 +29,9 @@
     <target name="clean">
         <delete dir="${build.dir}" />
     </target>
-
-    <target name="resolve">
-    	<property name="ivy.default.ivy.user.dir" value="${absolute.path}\${lib.dir}"/>
-    	<ivy:retrieve type="jar" />
-    </target>
-	
-	<!-- Create executables !-->
-	<target name="executable" depends="jar" description="Create executables">
-		<!-- Windows 32bit !-->
-		<mkdir dir="${executables.dir}/win32_x86"/>
-		<mkdir dir="${executables.dir}/win32_x86/jar"/>
-		<copy file="${jar.dir}/${app.name}_win32_x86.jar" todir="${executables.dir}/win32_x86/jar"/>
-		<copy file="scripts/launch4j_win32_x86.xml" todir="${executables.dir}/win32_x86"/>
-		<launch4j configFile="${executables.dir}/win32_x86/launch4j_win32_x86.xml" outfile="${executables.dir}/win32_x86/${exeFile}" />
-		<delete file="${executables.dir}/win32_x86/launch4j_win32_x86.xml" />
-		
-		<!-- Windows 64bit !-->
-		<mkdir dir="${executables.dir}/win32_x64"/>
-		<mkdir dir="${executables.dir}/win32_x64/jar"/>
-		<copy file="${jar.dir}/${app.name}_win32_x64.jar" todir="${executables.dir}/win32_x64/jar"/>
-		<copy file="scripts/launch4j_win32_x64.xml" todir="${executables.dir}/win32_x64"/>
-		<launch4j configFile="${executables.dir}/win32_x64/launch4j_win32_x64.xml" outfile="${executables.dir}/win32_x64/${exeFile}" />
-		<delete file="${executables.dir}/win32_x64/launch4j_win32_x64.xml" />
-	</target>
 	
     <!-- Compile the project -->
-    <target name="compile" depends="resolve">
+    <target name="compile">
         <mkdir dir="${classes.dir}" />
     	<echo message="Ant using Java version: ${ant.java.version}" />
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false" />
@@ -140,7 +107,7 @@
 
             <zipgroupfileset dir="${lib.dir}" includes="**/jar-in-jar-loader.jar" />
             <zipfileset dir="${lib.swt.dir}" includes="**/swt-${swt.version}_win32_x64.jar" />
-        	<zipfileset dir="${lib.dir}" includes="**/*.jar" excludes="**/jar-in-jar-loader.jar, **/swt/*, **/cache/*" />
+        	<zipfileset dir="${lib.dir}" includes="**/*.jar" excludes="**/jar-in-jar-loader.jar, **/swt/*" />
         	<zipfileset dir="${resources.dir}" includes="**/*"/>
         </jar>
         <!-- MacOS 32bit -->
@@ -173,6 +140,6 @@
         </jar>
     </target>
 
-    <target name="clean-build" depends="clean,executable" />
+    <target name="clean-build" depends="clean,jar" />
 
 </project>

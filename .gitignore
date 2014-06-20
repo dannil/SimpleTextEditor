@@ -5,6 +5,8 @@
 /gen/
 /target/
 /lib/cache/
+/vendor/jre/
+/jwrapper/
 
 # OS Files #
 .DS_Store
