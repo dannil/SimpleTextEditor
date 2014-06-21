@@ -67,7 +67,7 @@ public final class MainView {
 		
 		this.contentList.add(this.tabIndex, "");
 		this.fileNameList.add(this.tabIndex, "");
-		this.isFileSavedList.add(this.tabIndex, false);
+		this.isFileSavedList.add(this.tabIndex, true);
 	}
 	
 	
@@ -90,6 +90,8 @@ public final class MainView {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		System.out.println(MainView.this.isFileSavedList.get(tabIndex));
+		
 		this.shlMain = new Shell();
 		this.shlMain.setSize(960, 540);
 		this.shlMain.setText(this.languageBundle.getString("app.name"));
@@ -117,24 +119,29 @@ public final class MainView {
 			@Override
 			public void handleEvent(Event event) {
 				System.out.println("New selected");
-				System.out.println(MainView.this.isFileSavedList.get(MainView.this.tabIndex));
+				System.out.println("Is file saved? : " + MainView.this.isFileSavedList.get(MainView.this.tabIndex));
 				System.out.println(MainView.this.fileNameList.get(MainView.this.tabIndex));
-				if (!MainView.this.isFileSavedList.get(MainView.this.tabIndex) && !MainView.this.fileNameList.get(MainView.this.tabIndex).equals("")) {
+				if (!MainView.this.isFileSavedList.get(MainView.this.tabIndex)) {
 			        System.out.println("Entering if-statement");
 					MessageBox messageBox = new MessageBox(MainView.this.shlMain, SWT.YES | SWT.NO);
 			        messageBox.setMessage(MainView.this.languageBundle.getString("mainview.unsaved.changes"));
-			        messageBox.setText(MainView.this.languageBundle.getString("new.file"));
+			        messageBox.setText(MainView.this.languageBundle.getString("mainview.new.file"));
 			        int response = messageBox.open();
 			        
 			        if (response == SWT.NO) {
 			        	System.out.println("Response was NO");
 			        	Document document = new Document(MainView.this.fileNameList.get(MainView.this.tabIndex), MainView.this.txtEditField.getText());
-			        	MainView.this.applicationController.saveFileAs(MainView.this.shlMain, document);
+			        	boolean success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, document);
+			        	if (success) {
+			        		MainView.this.isFileSavedList.set(MainView.this.tabIndex, true);
+			        	}
 			        } else if (response == SWT.YES) {
+			        	System.out.println("Response was YES");
 			        	MainView.this.contentList.set(MainView.this.tabIndex, "");
+			        	System.out.println(MainView.this.contentList.get(MainView.this.tabIndex));
+			        	MainView.this.isFileSavedList.set(MainView.this.tabIndex, true);
+			        	MainView.this.txtEditField.setText(MainView.this.contentList.get(MainView.this.tabIndex));
 			        }
-				} else {
-					MainView.this.txtEditField.setText(MainView.this.contentList.get(MainView.this.tabIndex));
 				}
 			}
 		});
@@ -160,7 +167,7 @@ public final class MainView {
 					
 					MainView.this.shlMain.setText(MainView.this.languageBundle.getString("app.name") + " - " + Files.getNameWithoutExtension(MainView.this.fileNameList.get(MainView.this.tabIndex)) + "." + Files.getFileExtension(MainView.this.fileNameList.get(MainView.this.tabIndex)));
 					
-					System.out.print(MainView.this.contentList.get(MainView.this.tabIndex));
+					System.out.println(MainView.this.contentList.get(MainView.this.tabIndex));
 				}
 			}
 		});
@@ -195,14 +202,16 @@ public final class MainView {
 				System.out.println("Save as selected");
 				System.out.println(MainView.this.isFileSavedList.get(MainView.this.tabIndex));
 				System.out.println(MainView.this.contentList.get(MainView.this.tabIndex));
+				
 				boolean success = false;
+				String content = MainView.this.contentList.get(MainView.this.tabIndex);
 				if (MainView.this.isFileSavedList.get(MainView.this.tabIndex)) {
 					System.out.println("Entering if-statement");
-					Document document = new Document(MainView.this.fileNameList.get(MainView.this.tabIndex), MainView.this.contentList.get(MainView.this.tabIndex));
+					Document document = new Document(MainView.this.fileNameList.get(MainView.this.tabIndex), content);
 					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, document);
 				} else {
 					System.out.println("Entering else-statement");
-					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, MainView.this.contentList.get(MainView.this.tabIndex));
+					success = MainView.this.applicationController.saveFileAs(MainView.this.shlMain, content);
 				}
 				
 				if (success) {
@@ -280,6 +289,11 @@ public final class MainView {
 		this.txtEditField.addExtendedModifyListener(new ExtendedModifyListener() {
 			@Override
 			public void modifyText(ExtendedModifyEvent event) {
+				System.out.println("Text changed");
+				String content = MainView.this.txtEditField.getText();
+				if (!content.equals("")) {
+					MainView.this.isFileSavedList.set(MainView.this.tabIndex, false);
+				}
 				MainView.this.contentList.set(MainView.this.tabIndex, MainView.this.txtEditField.getText());
 			}
 		});

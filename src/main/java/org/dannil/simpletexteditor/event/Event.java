@@ -59,6 +59,7 @@ final public class Event {
         fd.setFilterExtensions(this.FILTER_EXT);
         final String path = fd.open();
 		if (path != null) {
+			System.out.println("Writing file...");
 			final File file = new File(path);
 			@SuppressWarnings("resource")
 			final BufferedWriter output = new BufferedWriter(new FileWriter(file));
