@@ -35,7 +35,7 @@ public final class Document {
 		return this.path;
 	}
 
-	public final void setPath(String path) {
+	public final void setPath(final String path) {
 		this.path = path;
 	}
 
@@ -43,7 +43,7 @@ public final class Document {
 		return this.content;
 	}
 
-	public final void setContent(String content) {
+	public final void setContent(final String content) {
 		this.content = content;
 	}
 
@@ -51,7 +51,7 @@ public final class Document {
 		return this.extension;
 	}
 
-	public final void setExtension(String extension) {
+	public final void setExtension(final String extension) {
 		this.extension = extension;
 	}
 	
