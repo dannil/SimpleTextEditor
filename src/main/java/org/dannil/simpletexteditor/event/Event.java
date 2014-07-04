@@ -31,7 +31,7 @@ final public class Event {
 	
 	public String[] openFile(Shell shell) throws IOException {
         final FileDialog fd = new FileDialog(shell, SWT.OPEN);
-        fd.setText(this.languageBundle.getString("mainview.open.file"));
+        fd.setText(LanguageUtility.getStringWithCheck("mainview.open.file", this.languageBundle));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
@@ -53,18 +53,20 @@ final public class Event {
 	
 	public boolean saveFileAs(Shell shell, String content) throws IOException {
 		final FileDialog fd = new FileDialog(shell, SWT.SAVE);
-        fd.setText(this.languageBundle.getString("mainview.save.file.as"));
+        fd.setText(LanguageUtility.getStringWithCheck("mainview.save.file.as", this.languageBundle));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
         final String path = fd.open();
 		if (path != null) {
-			System.out.println("Writing file...");
 			final File file = new File(path);
-			@SuppressWarnings("resource")
+			Files.write(content, file, Charsets.UTF_8);
+			
+			/*@SuppressWarnings("resource")
 			final BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			System.out.println("Writing file...");
 			output.write(content);
-			output.close();
+			output.close();*/
 			
 			return true;
 		}
@@ -73,7 +75,7 @@ final public class Event {
 	
 	public boolean saveFileAs(Shell shell, Document document) throws IOException {
 		final FileDialog fd = new FileDialog(shell, SWT.SAVE);
-        fd.setText(this.languageBundle.getString("mainview.save.file.as"));
+        fd.setText(LanguageUtility.getStringWithCheck("mainview.save.file.as", this.languageBundle));
         fd.setFilterPath("C:/Users/Daniel/Desktop");
         fd.setFilterNames(this.FILTER_NAMES);
         fd.setFilterExtensions(this.FILTER_EXT);
