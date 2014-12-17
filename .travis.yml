@@ -1,0 +1,12 @@
+language: java
+
+jdk:
+  - oraclejdk7
+  - openjdk7
+
+os:
+  - linux
+
+branches:
+  only:
+    - dev
