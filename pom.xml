@@ -7,7 +7,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	
 	<properties>
-		<swt.version>4.2.1</swt.version>
+		<swt.version>4.4</swt.version>
+		<guava.version>18.0</guava.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<jdk.version>1.7</jdk.version>
+		
 		<main.class>com.github.jendap.multiplatformswt.loader.MultiPlatformSwtHelper</main.class>
 		<rsrc.main.class>org.dannil.simpletexteditor.MainView</rsrc.main.class>
 	</properties>
@@ -16,7 +20,7 @@
 		<dependency>
 			<groupId>com.github.jendap</groupId>
 			<artifactId>multiplatform-swt-loader</artifactId>
-			<version>4.2.1</version>
+			<version>4.4</version>
 			<classifier>multiplatform</classifier>
 		</dependency>
 
@@ -26,17 +30,17 @@
 			<version>${swt.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.2</version>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-simple</artifactId>
+		    <version>${slf4j.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>18.0</version>
+			<version>${guava.version}</version>
 		</dependency>
 		
 	</dependencies>
@@ -80,11 +84,16 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+      		</plugin>
 		</plugins>
 	</build>
-
-
-
 
 	<!-- The profiles are used to select correct swt artifact at compile -->
 	<!-- (and development) time. We will have all of them at the runtime. -->
