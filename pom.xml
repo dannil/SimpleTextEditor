@@ -12,7 +12,7 @@
 
 		<swt.version>4.4</swt.version>
 		<guava.version>18.0</guava.version>
-		<slf4j.version>1.7.9</slf4j.version>
+		<slf4j.version>1.7.10</slf4j.version>
 		<jdk.version>1.7</jdk.version>
 		
 		<main.class>com.github.jendap.multiplatformswt.loader.MultiPlatformSwtHelper</main.class>
