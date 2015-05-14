@@ -12,7 +12,7 @@
 
 		<swt.version>4.4</swt.version>
 		<guava.version>18.0</guava.version>
-		<slf4j.version>1.7.10</slf4j.version>
+		<slf4j.version>1.7.12</slf4j.version>
 		<jdk.version>1.7</jdk.version>
 		
 		<main.class>com.github.jendap.multiplatformswt.loader.MultiPlatformSwtHelper</main.class>
@@ -55,7 +55,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.5.4</version>
 				<configuration>
 					<archive>
 						<!-- We put the main class and class path into manifest. This -->
@@ -89,7 +89,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<version>3.3</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
