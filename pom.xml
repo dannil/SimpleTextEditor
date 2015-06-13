@@ -55,7 +55,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.5.4</version>
+				<version>2.5.5</version>
 				<configuration>
 					<archive>
 						<!-- We put the main class and class path into manifest. This -->
